@@ -94,7 +94,7 @@ World generation uses normal Forge biome modifiers (`data/sweettreats/forge/biom
 
 ## Building and testing
 ```bash
-./gradlew build                 # jar in build/libs/sweettreats-1.0.0.jar
+./gradlew build                 # jar in build/libs/sweettreats-forge-1.20.1-1.0.0.jar
 ./gradlew runGameTestServer     # runs the 12 in-game GameTests headless, then exits
 ./gradlew runVisualTestClient   # dev-only: builds a demo bakery, screenshots every GUI to run-visualtest/screenshots, quits
 ./gradlew runClient             # play in a dev client
