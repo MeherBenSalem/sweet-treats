@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "minecraft:sugar",
+    "minecraft:red_dye",
+    "minecraft:yellow_dye",
+    "minecraft:blue_dye"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:sprinkles"
+  },
+  "mixingtime": 60
+}

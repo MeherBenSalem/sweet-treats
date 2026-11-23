@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IFI",
+    "PCP",
+    "P P"
+  ],
+  "key": {
+    "I": {
+      "item": "sweettreats:icing"
+    },
+    "F": {
+      "item": "sweettreats:sugar_flowers"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "id": "sweettreats:decoration_station"
+  }
+}

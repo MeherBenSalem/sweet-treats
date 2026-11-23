@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "sweettreats:decoration_station",
+    "sweettreats:bakery_counter",
+    "sweettreats:cake_display",
+    "sweettreats:bakery_sign",
+    "sweettreats:decorative_menu"
+  ]
+}

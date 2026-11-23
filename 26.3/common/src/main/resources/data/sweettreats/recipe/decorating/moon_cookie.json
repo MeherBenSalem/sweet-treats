@@ -1,0 +1,11 @@
+{
+  "type": "sweettreats:decorating",
+  "base": "sweettreats:sugar_cookie",
+  "toppings": [
+    "sweettreats:icing",
+    "minecraft:glow_berries"
+  ],
+  "result": {
+    "id": "sweettreats:moon_cookie"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:teacup"
+    },
+    {
+      "item": "sweettreats:chocolate"
+    },
+    {
+      "item": "sweettreats:cream"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:hot_chocolate"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

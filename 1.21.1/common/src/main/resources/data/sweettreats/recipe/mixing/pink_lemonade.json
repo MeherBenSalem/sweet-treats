@@ -1,0 +1,21 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:strawberry"
+    },
+    {
+      "item": "minecraft:glow_berries"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "id": "sweettreats:pink_lemonade"
+  },
+  "mixingtime": 60
+}

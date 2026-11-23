@@ -107,7 +107,7 @@ Every player gets a **Sweet Treats Recipe Book** the first time they join, and y
 - **Fruit trees:** a Peach Tree and a Cherry Tree, planted from pits. They grow from sapling to young tree to blossom to fruit. Right-click a fruiting tree to harvest it, and it grows its fruit back.
 - **Wild plants** grow in the world: wild strawberries in plains, forests and meadows, wild lavender in meadows, flower forests, plains and cherry groves, and wild vanilla in jungles.
 - **Extra drops:** grass, tall grass and ferns sometimes drop seeds and pits, and cherry leaves drop cherries.
-- **Wandering traders** sell seeds and pits.
+- **Wandering traders** sell seeds and pits (Minecraft 1.20.1 and 1.21.1).
 
 ![Bakery Displays](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-displays.png)
 
@@ -164,7 +164,7 @@ Every recipe is in the Recipe Book. The path through the kitchen:
 | `world.cherryLeafDrops` | `true` | Cherries from cherry leaves |
 | `world.dropChanceMultiplier` | `1.0` | Scales those drop chances |
 | `world.fruitTreeGrowthChance` | `5` | Fruit trees grow a stage with a 1-in-N chance per random tick |
-| `world.wanderingTraderTrades` | `true` | |
+| `world.wanderingTraderTrades` | `true` | Minecraft 1.20.1 and 1.21.1 only |
 
 `config/sweettreats-client.toml` turns the cooking particles and the cooking animations on or off for each player.
 
@@ -174,7 +174,7 @@ Every recipe is in the Recipe Book. The path through the kitchen:
 
 - **One creative tab:** *Sweet Treats*.
 - **Item tags** for data packs: `sweettreats:treats`, `sweettreats:drinks` and `sweettreats:displayable` (extra items the displays accept).
-- **World generation** uses normal Forge biome modifiers in `data/sweettreats/forge/biome_modifier`, so a data pack can turn the wild plants off or move them.
+- **World generation** uses normal biome modifiers on Forge and NeoForge (`data/sweettreats/forge/biome_modifier` and `data/sweettreats/neoforge/biome_modifier`), so a data pack can turn the wild plants off or move them.
 - **Multiplayer-ready:** recipe discoveries are saved on the server with each player.
 
 ![Downloads & Compatibility](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-compatibility.png)
@@ -182,14 +182,21 @@ Every recipe is in the Recipe Book. The path through the kitchen:
 | Minecraft | Loader | Java | Also install |
 | --- | --- | --- | --- |
 | 1.20.1 | Forge 47 or newer | 17+ | Nothing |
+| 1.20.1 | Fabric | 17+ | Fabric API |
+| 1.21.1 | NeoForge | 21+ | Nothing |
+| 1.21.1 | Fabric | 21+ | Fabric API |
+| 26.2 | NeoForge | 25+ | Nothing |
+| 26.2 | Fabric | 25+ | Fabric API |
+| 26.3 | NeoForge | 25+ | Nothing |
+| 26.3 | Fabric | 25+ | Fabric API |
 
-- Install Sweet Treats on **both the server and every client**: it is required on both sides.
+- Install Sweet Treats on **both the server and every client**.
 - Sweet Treats is a mod. It does not work as a Paper, Spigot or Folia plugin.
 
 ![Questions](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-faq.png)
 
 **Does it need any other mods?**
-No. Sweet Treats needs only Forge.
+On Forge and NeoForge, no. On Fabric it needs only Fabric API.
 
 **Can I automate the kitchen?**
 Yes. Hoppers fill the oven and the bowl from the top, fuel the oven and give the bowl its bottles from the sides, and empty both from the bottom. Recipes take repeated ingredients from a single stack.
@@ -198,14 +205,14 @@ Yes. Hoppers fill the oven and the bowl from the top, fuel the oven and give the
 Yes. Set `food.foodEffects` to `false`, or shorten them with `food.effectDurationMultiplier`.
 
 **Where do I find strawberries, vanilla and lavender?**
-Wild plants grow in plains, forests, meadows, flower forests, cherry groves and jungles. Grass and ferns sometimes drop seeds, and wandering traders sell them.
+Wild plants grow in plains, forests, meadows, flower forests, cherry groves and jungles. Grass and ferns sometimes drop seeds, and on Minecraft 1.20.1 and 1.21.1 wandering traders sell them.
 
 **I lost my Recipe Book.**
 Craft a new one from a book and sugar. Your discoveries are saved with your player, not in the book.
 
 **Is there a Fabric or NeoForge version?**
-Not yet. Sweet Treats runs on Forge for Minecraft 1.20.1.
+Yes. Sweet Treats runs on Fabric and Forge for Minecraft 1.20.1, and on Fabric and NeoForge for Minecraft 1.21.1, 26.2 and 26.3. Pick the file that matches both your Minecraft version and your loader.
 
-More screenshots of the bakery, the kitchen, the garden, every station and the Recipe Book are in this project's **Gallery** tab.
+More screenshots are in this project's **Gallery** tab.
 
 ---

@@ -5,7 +5,7 @@ Sweet Treats - block texture generator (16x16 pixel art, vanilla-style).
 Run from the project root (or anywhere):
     python tools/textures/gen_block_textures.py
 
-Writes RGBA PNGs to src/main/resources/assets/sweettreats/textures/block/
+Writes RGBA PNGs to 1.20.1/common/src/main/resources/assets/sweettreats/textures/block/
 Everything is deterministic: hand-authored ASCII maps + hash-based dithering,
 so re-running produces byte-identical output.
 """
@@ -18,7 +18,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = ROOT / "src" / "main" / "resources" / "assets" / "sweettreats" / "textures" / "block"
+OUT_DIR = ROOT / "1.20.1" / "common" / "src" / "main" / "resources" / "assets" / "sweettreats" / "textures" / "block"
 
 CLEAR = (0, 0, 0, 0)
 

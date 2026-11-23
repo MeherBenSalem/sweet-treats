@@ -13,7 +13,7 @@ import struct
 from collections import OrderedDict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RES = os.path.join(ROOT, "src", "main", "resources")
+RES = os.path.join(ROOT, "1.20.1", "common", "src", "main", "resources")
 ASSETS = os.path.join(RES, "assets", "sweettreats")
 DATA = os.path.join(RES, "data")
 MOD = "sweettreats"

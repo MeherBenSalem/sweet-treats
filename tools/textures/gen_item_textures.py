@@ -6,7 +6,7 @@ Run from the project root (or anywhere):
     python tools/textures/gen_item_textures.py
     python tools/textures/gen_item_textures.py --sheet out.png [--only a,b,c]
 
-Writes RGBA PNGs to src/main/resources/assets/sweettreats/textures/item/
+Writes RGBA PNGs to 1.20.1/common/src/main/resources/assets/sweettreats/textures/item/
 
 Sprites are hand-authored 16x16 ASCII grids, one char per pixel:
   '.'  transparent
@@ -28,7 +28,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
-OUT_DIR = os.path.join(ROOT, "src", "main", "resources", "assets", "sweettreats", "textures", "item")
+OUT_DIR = os.path.join(ROOT, "1.20.1", "common", "src", "main", "resources", "assets", "sweettreats", "textures", "item")
 
 # --------------------------------------------------------------------------- colour families
 # tones: h=highlight, l=light, b=base, m=mid, d=shade, x=deep shade, o=outline

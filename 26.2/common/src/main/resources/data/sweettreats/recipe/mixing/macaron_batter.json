@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "sweettreats:flour",
+    "minecraft:sugar",
+    "minecraft:sugar",
+    "minecraft:egg"
+  ],
+  "result": {
+    "id": "sweettreats:macaron_batter"
+  },
+  "mixingtime": 80
+}

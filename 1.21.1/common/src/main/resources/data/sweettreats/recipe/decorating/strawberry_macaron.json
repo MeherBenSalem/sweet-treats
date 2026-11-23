@@ -1,0 +1,18 @@
+{
+  "type": "sweettreats:decorating",
+  "base": {
+    "item": "sweettreats:macaron_shells"
+  },
+  "toppings": [
+    {
+      "item": "sweettreats:icing"
+    },
+    {
+      "item": "sweettreats:strawberry"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "sweettreats:strawberry_macaron"
+  }
+}

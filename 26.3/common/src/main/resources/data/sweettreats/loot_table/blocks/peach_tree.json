@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sweettreats:peach_pit"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "condition": {
+        "type": "minecraft:match_block",
+        "blocks": "sweettreats:peach_tree",
+        "state": {
+          "age": "3"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sweettreats:peach",
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 2,
+              "max": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "random_sequence": "sweettreats:blocks/peach_tree",
+  "modifier": {
+    "type": "minecraft:explosion_decay"
+  }
+}

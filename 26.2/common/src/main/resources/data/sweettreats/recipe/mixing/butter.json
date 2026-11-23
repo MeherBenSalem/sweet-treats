@@ -1,0 +1,11 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "sweettreats:cream",
+    "sweettreats:cream"
+  ],
+  "result": {
+    "id": "sweettreats:butter"
+  },
+  "mixingtime": 100
+}

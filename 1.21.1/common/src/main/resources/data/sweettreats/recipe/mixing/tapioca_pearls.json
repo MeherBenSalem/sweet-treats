@@ -1,0 +1,16 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:tapioca_pearls"
+  },
+  "mixingtime": 80
+}

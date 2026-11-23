@@ -1,0 +1,22 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:pastry_dough"
+    },
+    {
+      "item": "sweettreats:cherry"
+    },
+    {
+      "item": "sweettreats:cherry"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:cherry_pie"
+  },
+  "cookingtime": 240,
+  "experience": 0.5
+}

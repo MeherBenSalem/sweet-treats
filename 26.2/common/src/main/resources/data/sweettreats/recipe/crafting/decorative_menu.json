@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "SCS",
+    "S S"
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "C": [
+      "minecraft:coal",
+      "minecraft:charcoal"
+    ]
+  },
+  "result": {
+    "id": "sweettreats:decorative_menu"
+  }
+}

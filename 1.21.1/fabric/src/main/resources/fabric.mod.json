@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "license": "${license}",
+    "icon": "sweettreats_logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.sugarplumstudios.sweettreats.fabric.SweetTreatsFabric"
+        ],
+        "client": [
+            "com.sugarplumstudios.sweettreats.fabric.SweetTreatsFabricClient"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
+    }
+}

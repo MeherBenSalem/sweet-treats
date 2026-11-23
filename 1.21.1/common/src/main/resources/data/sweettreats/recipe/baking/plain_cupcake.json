@@ -1,0 +1,17 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:cake_batter"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:plain_cupcake"
+  },
+  "cookingtime": 200,
+  "experience": 0.35
+}

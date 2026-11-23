@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cake",
+    "sweettreats:teacup",
+    "sweettreats:sugar_flowers",
+    "sweettreats:sponge_cake",
+    "sweettreats:macaron_shells",
+    "sweettreats:icing",
+    "sweettreats:pink_icing",
+    "sweettreats:chocolate_frosting",
+    "sweettreats:sprinkles",
+    "sweettreats:vanilla_pod",
+    "sweettreats:lavender"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    "sweettreats:pastry_dough",
+    "sweettreats:cinnamon",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "count": 3,
+    "id": "sweettreats:cinnamon_roll"
+  },
+  "cookingtime": 200,
+  "experience": 0.35
+}

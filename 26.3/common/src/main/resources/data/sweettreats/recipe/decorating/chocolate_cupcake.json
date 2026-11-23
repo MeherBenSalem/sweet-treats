@@ -1,0 +1,10 @@
+{
+  "type": "sweettreats:decorating",
+  "base": "sweettreats:plain_cupcake",
+  "toppings": [
+    "sweettreats:chocolate_frosting"
+  ],
+  "result": {
+    "id": "sweettreats:chocolate_cupcake"
+  }
+}

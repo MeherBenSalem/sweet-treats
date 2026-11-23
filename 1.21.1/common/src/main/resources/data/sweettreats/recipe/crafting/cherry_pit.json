@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "sweettreats:cherry"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:cherry_pit"
+  }
+}

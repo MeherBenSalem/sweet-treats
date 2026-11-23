@@ -1,0 +1,3 @@
+accessWidener v2 official
+# Fabric counterpart of META-INF/accesstransformer.cfg: creative tab contents are filled from common code.
+accessible class net/minecraft/world/item/CreativeModeTab$Output

@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "sweettreats:cream",
+    "sweettreats:strawberry",
+    "sweettreats:strawberry"
+  ],
+  "container": "minecraft:glass_bottle",
+  "result": {
+    "id": "sweettreats:strawberry_milk"
+  },
+  "mixingtime": 60
+}

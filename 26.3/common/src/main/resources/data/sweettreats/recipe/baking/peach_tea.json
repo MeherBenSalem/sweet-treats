@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    "sweettreats:teacup",
+    "sweettreats:peach",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "id": "sweettreats:peach_tea"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

@@ -9,10 +9,13 @@ const fs = require('fs');
 const { chromium } = require('playwright');
 
 // The release and the supported Minecraft versions. Adding a version is one line here
-// (plus one row in the compatibility tables of curseforge/description.md and modrinth/description.md).
+// (plus one row in the compatibility table of curseforge/description.md; tools/make_modrinth_md.py copies it to modrinth/).
 const RELEASE = { version: '1.0' };
 const VERSIONS = [
-  { minecraft: '1.20.1', loaders: ['Forge'] },
+  { minecraft: '1.20.1', loaders: ['Fabric', 'Forge'] },
+  { minecraft: '1.21.1', loaders: ['Fabric', 'NeoForge'] },
+  { minecraft: '26.2', loaders: ['Fabric', 'NeoForge'] },
+  { minecraft: '26.3', loaders: ['Fabric', 'NeoForge'] },
 ];
 const LOADERS = ['Fabric', 'Forge', 'NeoForge'].filter((loader) => VERSIONS.some((v) => v.loaders.includes(loader)));
 
@@ -21,13 +24,13 @@ const out = path.join(root, 'marketing', 'images');
 const shots = path.join(out, 'screenshots');
 const fonts = path.join(__dirname, 'fonts');
 const renders = path.join(__dirname, 'renders');
-const items = path.join(root, 'src', 'main', 'resources', 'assets', 'sweettreats', 'textures', 'item');
+const items = path.join(root, '1.20.1', 'common', 'src', 'main', 'resources', 'assets', 'sweettreats', 'textures', 'item');
 const url = (file) => 'file://' + file;
 const shot = (name) => url(path.join(shots, name));
 const source = (name) => url(path.join(__dirname, name));
 
 // Names from the en_us lang file; effects and food values from registry/ModItems.java.
-const NAMES = JSON.parse(fs.readFileSync(path.join(root, 'src/main/resources/assets/sweettreats/lang/en_us.json'), 'utf8'));
+const NAMES = JSON.parse(fs.readFileSync(path.join(root, '1.20.1/common/src/main/resources/assets/sweettreats/lang/en_us.json'), 'utf8'));
 const nameOf = (id) => NAMES[`item.sweettreats.${id}`] || NAMES[`block.sweettreats.${id}`] || id;
 
 const css = `
@@ -199,7 +202,7 @@ const assets = {
       <div class="rule" style="width:560px;margin:18px 0 24px"></div>
       <div style="font-family:StDisplay;font-size:42px;color:var(--cocoa);line-height:1.2">A cute bakery mod.</div>
       <div style="font-size:27px;color:var(--text);line-height:1.35;margin-top:8px">Bake pastel pastries, brew teas and mix milkshakes,<br>then show them off in your own bakery.</div>
-      <div style="margin-top:30px">${LOADERS.map((l) => `<span class="pill">${l}</span>`).join('')}<span class="pill ghost">No dependencies</span></div>
+      <div style="margin-top:30px">${LOADERS.map((l) => `<span class="pill">${l}</span>`).join('')}<span class="pill ghost">Fabric API on Fabric</span></div>
       <div style="margin-top:16px;font-family:StDisplay;font-size:26px;color:var(--dim)">Minecraft ${versionText}</div>
     </div>
     <div style="position:absolute;left:880px;bottom:44px;display:flex;gap:14px;filter:drop-shadow(0 10px 16px rgba(107,63,58,.3))">

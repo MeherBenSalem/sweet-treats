@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "minecraft:sugar",
+    "minecraft:sugar",
+    "#minecraft:small_flowers"
+  ],
+  "result": {
+    "count": 2,
+    "id": "sweettreats:sugar_flowers"
+  },
+  "mixingtime": 60
+}

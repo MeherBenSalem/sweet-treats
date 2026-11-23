@@ -1,0 +1,24 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:cream"
+    },
+    {
+      "item": "sweettreats:cream"
+    },
+    {
+      "item": "sweettreats:vanilla_pod"
+    },
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "id": "sweettreats:vanilla_milkshake"
+  },
+  "mixingtime": 80
+}

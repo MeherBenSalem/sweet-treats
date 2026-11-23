@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TTT",
+    "TFT",
+    "BBB"
+  ],
+  "key": {
+    "T": "#minecraft:terracotta",
+    "F": "minecraft:furnace",
+    "B": "minecraft:brick"
+  },
+  "result": {
+    "id": "sweettreats:bakery_oven"
+  }
+}

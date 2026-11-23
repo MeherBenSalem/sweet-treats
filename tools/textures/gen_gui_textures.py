@@ -8,7 +8,7 @@ import os
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-OUT = os.path.join(ROOT, "src", "main", "resources", "assets", "sweettreats", "textures", "gui")
+OUT = os.path.join(ROOT, "1.20.1", "common", "src", "main", "resources", "assets", "sweettreats", "textures", "gui")
 
 
 def hexc(h, a=255):

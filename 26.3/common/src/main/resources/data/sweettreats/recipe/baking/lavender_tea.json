@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    "sweettreats:teacup",
+    "sweettreats:lavender",
+    "sweettreats:lavender"
+  ],
+  "result": {
+    "id": "sweettreats:lavender_tea"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

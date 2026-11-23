@@ -1,0 +1,15 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    "minecraft:sugar",
+    "minecraft:sugar",
+    "sweettreats:strawberry",
+    "minecraft:stick"
+  ],
+  "result": {
+    "count": 2,
+    "id": "sweettreats:strawberry_lollipop"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

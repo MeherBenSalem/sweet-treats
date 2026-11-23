@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "sweettreats:bakery_oven",
+    "sweettreats:mixing_bowl",
+    "sweettreats:cupcake_stand",
+    "sweettreats:dessert_plate",
+    "sweettreats:tea_set",
+    "sweettreats:glass_jar"
+  ]
+}

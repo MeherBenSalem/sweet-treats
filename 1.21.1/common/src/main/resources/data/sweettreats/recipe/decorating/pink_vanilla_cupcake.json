@@ -1,0 +1,17 @@
+{
+  "type": "sweettreats:decorating",
+  "base": {
+    "item": "sweettreats:plain_cupcake"
+  },
+  "toppings": [
+    {
+      "item": "sweettreats:pink_icing"
+    },
+    {
+      "item": "sweettreats:sugar_flowers"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:pink_vanilla_cupcake"
+  }
+}

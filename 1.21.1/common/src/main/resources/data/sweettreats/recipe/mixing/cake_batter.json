@@ -1,0 +1,27 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:flour"
+    },
+    {
+      "item": "sweettreats:flour"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "sweettreats:cream"
+    },
+    {
+      "item": "sweettreats:vanilla_pod"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:cake_batter"
+  },
+  "mixingtime": 100
+}

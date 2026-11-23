@@ -1,0 +1,59 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        configureEach {
+            ideName = "Forge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
+            systemProperty 'forge.enabledGameTestNamespaces', mod_id
+        }
+        client {
+            client()
+            gameDirectory = project.file('runs/client')
+        }
+        server {
+            server()
+            gameDirectory = project.file('runs/server')
+            programArgument '--nogui'
+        }
+        // Runs the mod's GameTests headlessly, then exits (non-zero on failure).
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = project.file('runs/gametest')
+        }
+        // Opens a client, builds a demo bakery, screenshots every screen into runs/visualtest/screenshots, then quits.
+        visualTestClient {
+            client()
+            gameDirectory = project.file('runs/visualtest')
+            systemProperty 'sweettreats.visualtest', 'true'
+            programArguments.addAll('--width', '1280', '--height', '720')
+        }
+        // Marketing showcase: builds a little bakery shop, takes 1920x1080 shots into runs/showcase/screenshots, then quits.
+        showcaseClient {
+            client()
+            gameDirectory = project.file('runs/showcase')
+            systemProperty 'sweettreats.showcase', 'true'
+            programArguments.addAll('--width', '1920', '--height', '1080')
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+jar {
+    // the visual self test and the marketing showcase are development tools only
+    exclude 'com/sugarplumstudios/sweettreats/dev/**'
+    finalizedBy('reobfJar')
+}

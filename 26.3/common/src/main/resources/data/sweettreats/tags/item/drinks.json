@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "sweettreats:strawberry_milk",
+    "sweettreats:vanilla_milkshake",
+    "sweettreats:lavender_tea",
+    "sweettreats:peach_tea",
+    "sweettreats:bubble_tea",
+    "sweettreats:pink_lemonade",
+    "sweettreats:hot_chocolate",
+    "sweettreats:rose_tea"
+  ]
+}

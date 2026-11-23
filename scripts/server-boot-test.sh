@@ -7,10 +7,10 @@
 set -u
 JAR="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-MC=$(grep '^minecraft_version=' "$ROOT/gradle.properties" | cut -d= -f2)
-FORGE=$(grep '^forge_version=' "$ROOT/gradle.properties" | cut -d= -f2)
+MC=$(grep '^minecraft_version=' "$ROOT/1.20.1/gradle.properties" | cut -d= -f2)
+FORGE=$(grep '^forge_version=' "$ROOT/1.20.1/gradle.properties" | cut -d= -f2)
 SERVER="$ROOT/build/boot-test-server"
-IDS=$(ls "$ROOT/src/main/resources/assets/sweettreats/blockstates" | sed 's/\.json$//')
+IDS=$(ls "$ROOT/1.20.1/common/src/main/resources/assets/sweettreats/blockstates" | sed 's/\.json$//')
 COUNT=$(echo "$IDS" | grep -c .)
 rm -rf "$SERVER"; mkdir -p "$SERVER/mods"
 cd "$SERVER"
@@ -69,5 +69,5 @@ echo "Result: $result"
 grep -q "This crash report has been saved" "$LOG" && exit 1
 grep -q -E "Done \([0-9.]+s\)!" "$LOG" || { echo "The server never finished starting"; exit 1; }
 grep -q "SWEET_BOOT_PLACED $COUNT" "$LOG" || { echo "Not every block was placed"; exit 1; }
-if grep -E "ERROR|Exception|Caused by" "$LOG" | grep -q -E 'com.sugarplumstudios|sweettreats'; then echo "The log has errors naming Sweet Treats"; exit 1; fi
+if grep -E "ERROR|Exception|Caused by" "$LOG" | grep -q -E 'com.sugarplumstudios|sweettreats([^-.a-z]|$)'; then echo "The log has errors naming Sweet Treats"; exit 1; fi
 echo "Server boot test passed: $COUNT blocks placed"

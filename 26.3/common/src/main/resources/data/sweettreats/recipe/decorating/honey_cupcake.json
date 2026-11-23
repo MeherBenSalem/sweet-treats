@@ -1,0 +1,10 @@
+{
+  "type": "sweettreats:decorating",
+  "base": "sweettreats:plain_cupcake",
+  "toppings": [
+    "minecraft:honey_bottle"
+  ],
+  "result": {
+    "id": "sweettreats:honey_cupcake"
+  }
+}

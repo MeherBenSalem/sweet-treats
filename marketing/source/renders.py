@@ -14,7 +14,7 @@ import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
-ASSETS = ROOT / "src" / "main" / "resources" / "assets" / "sweettreats"
+ASSETS = ROOT / "1.20.1" / "common" / "src" / "main" / "resources" / "assets" / "sweettreats"
 OUT = Path(__file__).resolve().parent / "renders"
 SCALE = 12
 

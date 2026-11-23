@@ -1,0 +1,24 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:teacup"
+    },
+    [
+      {
+        "item": "minecraft:rose_bush"
+      },
+      {
+        "item": "minecraft:poppy"
+      }
+    ],
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:rose_tea"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

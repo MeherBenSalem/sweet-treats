@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "sweettreats:teacup",
+    "sweettreats:teacup",
+    "sweettreats:teacup",
+    "sweettreats:dessert_plate"
+  ],
+  "result": {
+    "id": "sweettreats:tea_set"
+  }
+}

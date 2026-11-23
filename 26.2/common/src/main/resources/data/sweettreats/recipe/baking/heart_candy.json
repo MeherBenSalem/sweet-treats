@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    "minecraft:sugar",
+    "minecraft:sugar",
+    "sweettreats:strawberry"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:heart_candy"
+  },
+  "cookingtime": 120,
+  "experience": 0.2
+}

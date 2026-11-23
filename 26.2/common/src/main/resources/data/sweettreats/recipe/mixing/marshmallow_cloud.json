@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    "minecraft:sugar",
+    "minecraft:sugar",
+    "minecraft:egg",
+    "sweettreats:vanilla_pod"
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:marshmallow_cloud"
+  },
+  "mixingtime": 100
+}

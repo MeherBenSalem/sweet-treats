@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sweettreats:cherry_pie"
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:match_block",
+            "blocks": "sweettreats:cherry_pie",
+            "state": {
+              "bites": "0"
+            }
+          },
+          {
+            "type": "minecraft:survives_explosion"
+          }
+        ]
+      }
+    }
+  ],
+  "random_sequence": "sweettreats:blocks/cherry_pie"
+}

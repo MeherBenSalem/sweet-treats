@@ -1,0 +1,20 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:pastry_dough"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "sweettreats:sprinkles"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "sweettreats:mini_donuts"
+  },
+  "cookingtime": 160,
+  "experience": 0.35
+}

@@ -1,0 +1,13 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:cake_batter"
+    }
+  ],
+  "result": {
+    "id": "sweettreats:sponge_cake"
+  },
+  "cookingtime": 200,
+  "experience": 0.35
+}

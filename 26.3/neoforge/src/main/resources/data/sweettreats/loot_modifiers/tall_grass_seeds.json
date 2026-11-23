@@ -1,0 +1,31 @@
+{
+  "type": "sweettreats:add_weighted_item",
+  "condition": {
+    "type": "neoforge:loot_table_id",
+    "loot_table_id": "minecraft:blocks/tall_grass"
+  },
+  "toggle": "grass_seeds",
+  "chance": 0.08,
+  "entries": [
+    {
+      "item": "sweettreats:strawberry_seeds",
+      "weight": 5
+    },
+    {
+      "item": "sweettreats:lavender_seeds",
+      "weight": 4
+    },
+    {
+      "item": "sweettreats:vanilla_seeds",
+      "weight": 2
+    },
+    {
+      "item": "sweettreats:peach_pit",
+      "weight": 1
+    },
+    {
+      "item": "sweettreats:cherry_pit",
+      "weight": 1
+    }
+  ]
+}

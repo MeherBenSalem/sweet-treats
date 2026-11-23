@@ -1,72 +1,124 @@
-# Builds the Forge 1.20.1 jar and checks that it runs: the mod's GameTests (runGameTestServer), a real Forge
-# dedicated server booted with the built jar that places every Sweet Treats block (scripts/server-boot-test.sh), and a
-# real client that builds the demo bakery, opens every screen, screenshots them and quits (runVisualTestClient). Runs on
-# pull requests, by hand, and from the Build release jar workflow. It never publishes anything.
+# CI for Sweet Treats (NightBeam convention; modelled on RE:Constructed Wands' ci.yml).
+# Builds all 8 jars (1.20.1 Fabric + Forge; 1.21.1, 26.2, 26.3 Fabric + NeoForge) with ./gradlew buildAll, checks
+# that every workspace has the same version= and that the metadata ranges stay inside their Minecraft line, runs the
+# publisher script tests (the same-day guard and the jar-name detection the upload step uses), and checks that the
+# mod runs (the old Forge-only CI checks are kept for the 1.20.1 Forge jar):
+#   - the 1.20.1 Forge jar: manifest, mods.toml, SRG names, no dev harness (visual self test / showcase);
+#   - the mod's GameTests on 1.20.1 Forge (runGameTestServer);
+#   - a real Forge 1.20.1 dedicated server booted with the built jar that places every block (scripts/server-boot-test.sh);
+#   - a dev server for every target that places every block (scripts/server-smoke-test.sh);
+#   - a 1.20.1 Forge client that builds the demo bakery, opens every screen, screenshots them and quits
+#     (runVisualTestClient).
+# It never publishes anything.
 
 name: CI
 
 on:
-  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
-  workflow_call:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Check publisher syntax
+        run: |
+          for f in scripts/*.mjs .github/scripts/*.js; do node --check "$f"; done
+      - name: Test publisher scripts (same-day guard)
+        run: node --test scripts/*.test.mjs
+      # Jar name -> loader + Minecraft version, as the upload step reads it (calendar versions such as 26.2 must
+      # never fall back to 1.21.1).
+      - name: Test jar metadata detection
+        run: node .github/scripts/detect-jar-meta.test.js
+      - name: Check the 8 targets, one version and metadata ranges
+        run: python3 scripts/check_targets.py workspaces
+
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # 21 stays JAVA_HOME (Gradle for 1.20.1/1.21.1); 17 is the 1.20.1 toolchain; the root build hands 26.x
+      # JAVA_HOME_25_X64.
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: |
+            17
+            25
+            21
       - uses: gradle/actions/setup-gradle@v4
-      - run: chmod +x gradlew
-      - name: Build
-        run: ./gradlew build --stacktrace
-      - name: Check the jar
+      - name: Build all 8 jars
         run: |
-          set -e
-          V=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
-          MC=$(grep '^minecraft_version=' gradle.properties | cut -d= -f2)
-          name="sweettreats-forge-$MC-$V.jar"
-          jar="build/libs/$name"
-          ls -la build/libs
+          chmod +x gradlew 1.20.1/gradlew 1.21.1/gradlew 26.2/gradlew 26.3/gradlew
+          ./gradlew buildAll --no-daemon --continue
+      - name: Check the 8 jars
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(python3 scripts/check_targets.py version)"
+          python3 scripts/check_targets.py jars --version "$version" --dir releases --list-file ci-jars.txt
+          mkdir -p ci-jars
+          xargs -a ci-jars.txt cp -f -t ci-jars/
+          # The upload step must be able to read loader + Minecraft version from every built jar name.
+          while IFS= read -r jar; do node .github/scripts/detect-jar-meta.js "$jar"; done < ci-jars.txt
+      - name: Check the 1.20.1 Forge jar
+        shell: bash
+        run: |
+          set -euo pipefail
+          V="$(python3 scripts/check_targets.py version)"
+          name="sweettreats-forge-1.20.1-$V.jar"
+          jar="ci-jars/$name"
           [ -f "$jar" ] || { echo "Missing $jar"; exit 1; }
           dir=$(mktemp -d); unzip -q "$jar" -d "$dir"
           grep -q "Implementation-Version: $V" "$dir/META-INF/MANIFEST.MF" || { echo "Manifest is not $V"; exit 1; }
           grep -q 'modId="sweettreats"' "$dir/META-INF/mods.toml" || { echo "mods.toml has no sweettreats"; exit 1; }
           grep -q "version=\"$V\"" "$dir/META-INF/mods.toml" || { echo "mods.toml version is not $V"; exit 1; }
-          [ ! -d "$dir/com/sugarplumstudios/sweettreats/visualtest" ] || { echo "The visual self test is in the jar"; exit 1; }
-          main="$dir/com/sugarplumstudios/sweettreats/SweetTreats.class"
-          [ -f "$main" ] || { echo "No SweetTreats class"; exit 1; }
+          [ ! -d "$dir/com/sugarplumstudios/sweettreats/dev" ] || { echo "The visual self test / showcase is in the jar"; exit 1; }
+          [ -f "$dir/com/sugarplumstudios/sweettreats/SweetTreats.class" ] || { echo "No SweetTreats class"; exit 1; }
           find "$dir/com" -name '*.class' -exec strings {} + | grep -q -E '^(m|f)_[0-9]+_$' || { echo "The jar is not SRG-mapped"; exit 1; }
           echo "OK $name $(stat -c %s "$jar") bytes, $(find "$dir/data/sweettreats/recipes" -name '*.json' | wc -l) recipes"
       - uses: actions/upload-artifact@v4
         with:
-          name: jar
-          path: build/libs/sweettreats-forge-*.jar
+          name: sweettreats-jars
+          path: ci-jars/*.jar
+          if-no-files-found: error
 
   gametests:
-    name: GameTests
+    name: GameTests (1.20.1 Forge)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: |
+            17
+            21
       - uses: gradle/actions/setup-gradle@v4
-      - run: chmod +x gradlew
       - name: Run the GameTests
-        timeout-minutes: 20
-        run: ./gradlew runGameTestServer --stacktrace
+        timeout-minutes: 25
+        working-directory: 1.20.1
+        run: |
+          chmod +x gradlew
+          ./gradlew :forge:runGameTestServer --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64,JAVA_HOME_21_X64
 
-  server-test:
-    name: Server boot test with the built jar
+  server-boot:
+    name: Server boot test with the built 1.20.1 Forge jar
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -77,12 +129,12 @@ jobs:
           java-version: "17"
       - uses: actions/download-artifact@v4
         with:
-          name: jar
-          path: jar
+          name: sweettreats-jars
+          path: jars
       - run: chmod +x scripts/server-boot-test.sh
       - name: Boot a Forge server and place every block
         timeout-minutes: 15
-        run: scripts/server-boot-test.sh jar/sweettreats-forge-*.jar
+        run: scripts/server-boot-test.sh jars/sweettreats-forge-1.20.1-*.jar
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -93,42 +145,86 @@ jobs:
             build/boot-test-server/crash-reports/**
           if-no-files-found: ignore
 
+  # Starts a real dev server for each target and places every block, so the registries, block entities and
+  # loader glue of each line run (a compile alone can't prove that). 1.20.1 Fabric and 26.3 Fabric must pass.
+  server-smoke:
+    name: Server smoke test, ${{ matrix.loader }} ${{ matrix.minecraft }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.optional }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { minecraft: "1.20.1", loader: fabric, toolchain: "17", gradle_java: "21", optional: false }
+          - { minecraft: "1.20.1", loader: forge, toolchain: "17", gradle_java: "21", optional: true }
+          - { minecraft: "1.21.1", loader: fabric, toolchain: "17", gradle_java: "21", optional: true }
+          - { minecraft: "1.21.1", loader: neoforge, toolchain: "17", gradle_java: "21", optional: true }
+          - { minecraft: "26.2", loader: fabric, toolchain: "21", gradle_java: "25", optional: true }
+          - { minecraft: "26.2", loader: neoforge, toolchain: "21", gradle_java: "25", optional: true }
+          - { minecraft: "26.3", loader: fabric, toolchain: "21", gradle_java: "25", optional: false }
+          - { minecraft: "26.3", loader: neoforge, toolchain: "21", gradle_java: "25", optional: true }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            ${{ matrix.toolchain }}
+            ${{ matrix.gradle_java }}
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x ${{ matrix.minecraft }}/gradlew scripts/server-smoke-test.sh
+      - name: Place every block on a dev server
+        timeout-minutes: 25
+        run: scripts/server-smoke-test.sh ${{ matrix.minecraft }} ${{ matrix.loader }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-smoke-${{ matrix.minecraft }}-${{ matrix.loader }}
+          path: |
+            server-smoke-*.log
+            ${{ matrix.minecraft }}/${{ matrix.loader }}/runs/server/crash-reports/**
+          if-no-files-found: ignore
+
   client-test:
-    name: Client launch test
+    name: Client visual test (1.20.1 Forge)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: |
+            17
+            21
       - uses: gradle/actions/setup-gradle@v4
       - name: Install Xvfb and Mesa
         run: sudo apt-get update && sudo apt-get install -y xvfb libgl1-mesa-dri libglx-mesa0 mesa-utils
-      - run: chmod +x gradlew
       - name: Launch the client, build the demo bakery, screenshot every screen and quit
-        timeout-minutes: 20
+        timeout-minutes: 25
+        working-directory: 1.20.1
         run: |
-          xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +extension RENDER" sh -c 'glxinfo -B | head -20; ./gradlew runVisualTestClient --stacktrace'
+          chmod +x gradlew
+          xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +extension RENDER" sh -c 'glxinfo -B | head -20; ./gradlew :forge:runVisualTestClient --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64,JAVA_HOME_21_X64'
       - name: Check the screenshots and the log
+        working-directory: 1.20.1/forge/runs/visualtest
         run: |
           set -e
-          ls -la run-visualtest/screenshots || true
-          n=$(ls run-visualtest/screenshots/sweettreats_*.png 2>/dev/null | wc -l)
+          ls -la screenshots || true
+          n=$(ls screenshots/sweettreats_*.png 2>/dev/null | wc -l)
           echo "$n screenshots"
-          [ ! -d run-visualtest/crash-reports ] || { head -150 run-visualtest/crash-reports/*.txt; exit 1; }
+          [ ! -d crash-reports ] || { head -150 crash-reports/*.txt; exit 1; }
           [ "$n" -ge 11 ] || { echo "Expected 11 screenshots"; exit 1; }
-          grep -q "\[visualtest\] done, stopping client" run-visualtest/logs/latest.log || { echo "The visual test did not finish"; exit 1; }
-          if grep -E "ERROR|Exception|Caused by" run-visualtest/logs/latest.log | grep -E 'com.sugarplumstudios|sweettreats'; then echo "The log has errors naming Sweet Treats"; exit 1; fi
+          grep -q "\[visualtest\] done, stopping client" logs/latest.log || { echo "The visual test did not finish"; exit 1; }
+          if grep -E "ERROR|Exception|Caused by" logs/latest.log | grep -E 'com.sugarplumstudios|sweettreats([^-.a-z]|$)'; then echo "The log has errors naming Sweet Treats"; exit 1; fi
       - name: Errors in the log
         if: always()
-        run: grep -n -E "ERROR|Exception|Caused by|at com\.sugarplum" run-visualtest/logs/latest.log | head -200 || true
+        run: grep -n -E "ERROR|Exception|Caused by|at com\.sugarplum" 1.20.1/forge/runs/visualtest/logs/latest.log | head -200 || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: client-test
           path: |
-            run-visualtest/screenshots/**
-            run-visualtest/logs/latest.log
-            run-visualtest/crash-reports/**
+            1.20.1/forge/runs/visualtest/screenshots/**
+            1.20.1/forge/runs/visualtest/logs/latest.log
+            1.20.1/forge/runs/visualtest/crash-reports/**
           if-no-files-found: ignore

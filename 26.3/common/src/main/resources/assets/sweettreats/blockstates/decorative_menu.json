@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sweettreats:block/decorative_menu"
+    },
+    "facing=east": {
+      "model": "sweettreats:block/decorative_menu",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sweettreats:block/decorative_menu",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sweettreats:block/decorative_menu",
+      "y": 270
+    }
+  }
+}

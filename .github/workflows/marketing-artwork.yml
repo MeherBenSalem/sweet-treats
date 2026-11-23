@@ -1,22 +1,22 @@
 # Renders the listing artwork in marketing/images/ (banner, icon, cards, headers, divider) with marketing/source/render.cjs
-# and commits it to the branch it runs on. Runs by hand, or on a push that changes the artwork sources or this workflow.
-# It never publishes anything.
+# and commits it to main. Runs only by hand, on main. It never builds or publishes the mod.
 
 name: Marketing artwork
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "marketing/source/render.cjs"
-      - "marketing/source/renders/**"
-      - "marketing/source/fonts/**"
-      - "marketing/source/backdrop.jpg"
-      - "marketing/images/screenshots/**"
-      - ".github/workflows/marketing-artwork.yml"
+    inputs:
+      targets:
+        description: "Space-separated render.cjs targets (blank renders everything)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
+
+concurrency:
+  group: marketing-artwork-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   render:
@@ -24,6 +24,11 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Require main
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: |
+          echo "Artwork is only rendered on main."
+          exit 1
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -31,7 +36,9 @@ jobs:
       - name: Install Playwright
         run: npm install --no-save --no-audit --no-fund playwright@1.63.0
       - name: Render the artwork
-        run: CHROMIUM="$(command -v google-chrome)" NODE_PATH="$PWD/node_modules" node marketing/source/render.cjs
+        env:
+          TARGETS: ${{ inputs.targets }}
+        run: CHROMIUM="$(command -v google-chrome)" NODE_PATH="$PWD/node_modules" node marketing/source/render.cjs $TARGETS
       - name: Commit the artwork
         run: |
           set -e
@@ -40,4 +47,5 @@ jobs:
           git add marketing/images
           git diff --cached --quiet && { echo "No new artwork"; exit 0; }
           git commit -m "Marketing artwork rendered from marketing/source"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main

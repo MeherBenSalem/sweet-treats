@@ -19,7 +19,7 @@ Both descriptions lead with the pitch, then the treats, drinks, the Bakery Oven,
 ### Modrinth project settings
 
 - **Environment:** required on the client and on the server.
-- **Loader and version:** Forge, Minecraft 1.20.1.
+- **Loaders and versions:** Fabric and Forge on Minecraft 1.20.1; Fabric and NeoForge on Minecraft 1.21.1, 26.2 and 26.3 (8 files per release; Fabric needs Fabric API).
 - **Categories:** Food and Decoration.
 - **Gallery:** upload `images/screenshots/*.jpg` with the captions used in the CurseForge gallery (the alt texts at the end of `curseforge/description.md`), and `images/banner.png` as the featured image.
 
@@ -27,9 +27,9 @@ Both descriptions lead with the pitch, then the treats, drinks, the Bakery Oven,
 
 The supported versions are listed in these places:
 
-1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). Add one line, for example `{ minecraft: '1.21.1', loaders: ['NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
-2. The table under **Downloads & Compatibility** in `curseforge/description.md` and `modrinth/description.md`. Add one row per loader.
-3. The FAQ answer **Is there a Fabric or NeoForge version?** in both files.
+1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). Add one line, for example `{ minecraft: '26.4', loaders: ['Fabric', 'NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
+2. The table under **Downloads & Compatibility** in `curseforge/description.md`. Add one row per loader, then run `python3 tools/make_modrinth_md.py .` to regenerate `modrinth/description.md` and `modrinth/summary.txt`.
+3. The FAQ answer **Is there a Fabric or NeoForge version?** in `curseforge/description.md` (then regenerate the Modrinth copy).
 
 No other copy or artwork names a Minecraft version. A new release number goes in `RELEASE` in `render.cjs` and in the banner's alt text on the first line of both descriptions.
 
@@ -54,9 +54,9 @@ No other copy or artwork names a Minecraft version. A new release number goes in
 
 ### Where the pictures come from
 
-- **Screenshots** are the unedited captures in `source/captures/`, converted to JPEG. They are taken by the marketing showcase (`./gradlew runShowcaseClient`, `src/visualtest/.../MarketingShowcase.java`, dev-only and not in the jar): a flat creative world in Peaceful at 1920×1080 with the HUD hidden for the world shots. It builds the bakery shop, its kitchen, the display counter, the café tables, the crops and the fruit trees itself, so every Sweet Treats block in them is placed and filled by the mod's own code. The **Marketing screenshots** workflow (`.github/workflows/marketing-screenshots.yml`) runs it under Xvfb and commits fresh captures to `source/captures/`; run it from the Actions tab after changing the showcase.
+- **Screenshots** are the unedited captures in `source/captures/`, converted to JPEG. They are taken by the marketing showcase (`./gradlew :forge:runShowcaseClient` in `1.20.1/`, `1.20.1/forge/src/main/java/.../dev/MarketingShowcase.java`, dev-only and not in the jar): a flat creative world in Peaceful at 1920×1080 with the HUD hidden for the world shots. It builds the bakery shop, its kitchen, the display counter, the café tables, the crops and the fruit trees itself, so every Sweet Treats block in them is placed and filled by the mod's own code. The **Marketing screenshots** workflow (`.github/workflows/marketing-screenshots.yml`) runs it under Xvfb and commits fresh captures to `source/captures/` on main; it runs only by hand, from the Actions tab, after changing the showcase.
 - **Block renders** on the cards are isometric renders of the mod's own block models and textures, made without Minecraft by [`source/renders.py`](source/renders.py). They are in `source/renders/`, one PNG per model: the stations, the displays, the placeable cakes, the crops, each fruit tree stage and the wild plants.
-- **Item art** on the cards, banner and icon is the mod's own item textures from `src/main/resources/assets/sweettreats/textures/item/`, scaled up with nearest-neighbour.
+- **Item art** on the cards, banner and icon is the mod's own item textures from `1.20.1/common/src/main/resources/assets/sweettreats/textures/item/`, scaled up with nearest-neighbour.
 
 ## Regenerating the artwork
 
@@ -70,7 +70,7 @@ NODE_PATH="$(npm root -g)" node marketing/source/render.cjs banner icon  # selec
 - `renders.py` needs only Pillow and numpy. The few vanilla parent models it uses (cake, crop, cross, orientable) are written into the script.
 - `screenshots.py` converts `source/captures/*.png` to `images/screenshots/*.jpg` and makes `source/backdrop.jpg`, the blurred card background.
 - Set `CHROMIUM=/path/to/chromium` to render with a Chromium other than Playwright's own download.
-- The **Marketing artwork** workflow (`.github/workflows/marketing-artwork.yml`) runs `render.cjs` on GitHub's Ubuntu runner with its Google Chrome and commits the result to `images/`. It runs on a push that changes the artwork sources, or from the Actions tab.
+- The **Marketing artwork** workflow (`.github/workflows/marketing-artwork.yml`) runs `render.cjs` on GitHub's Ubuntu runner with its Google Chrome and commits the result to `images/` on main. It runs only by hand, from the Actions tab (optionally with a list of `render.cjs` targets).
 - The `region()` crops in `render.cjs` are pixel regions of the 1920×1080 captures. The screen crops (`OVEN`, `BOWL`, `STATION`, `BOOK`, `BOOKD`) are listed at the top of the script; adjust them if the GUI scale or the screens change.
 - `source/fonts/` holds Fredoka and Nunito with their SIL Open Font License 1.1 texts. The script uses only these files.
 

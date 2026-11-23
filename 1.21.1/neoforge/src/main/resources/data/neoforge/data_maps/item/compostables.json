@@ -1,0 +1,44 @@
+{
+  "replace": false,
+  "values": {
+    "sweettreats:strawberry": {
+      "chance": 0.3
+    },
+    "sweettreats:strawberry_seeds": {
+      "chance": 0.3
+    },
+    "sweettreats:vanilla_pod": {
+      "chance": 0.3
+    },
+    "sweettreats:vanilla_seeds": {
+      "chance": 0.3
+    },
+    "sweettreats:lavender": {
+      "chance": 0.3
+    },
+    "sweettreats:lavender_seeds": {
+      "chance": 0.3
+    },
+    "sweettreats:peach": {
+      "chance": 0.65
+    },
+    "sweettreats:peach_pit": {
+      "chance": 0.3
+    },
+    "sweettreats:cherry": {
+      "chance": 0.3
+    },
+    "sweettreats:cherry_pit": {
+      "chance": 0.3
+    },
+    "sweettreats:wild_strawberries": {
+      "chance": 0.65
+    },
+    "sweettreats:wild_lavender": {
+      "chance": 0.65
+    },
+    "sweettreats:wild_vanilla": {
+      "chance": 0.65
+    }
+  }
+}

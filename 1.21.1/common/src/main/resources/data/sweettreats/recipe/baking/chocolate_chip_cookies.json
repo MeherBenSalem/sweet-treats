@@ -1,0 +1,17 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:cookie_dough"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "minecraft:cookie"
+  },
+  "cookingtime": 160,
+  "experience": 0.3
+}

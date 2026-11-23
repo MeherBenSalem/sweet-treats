@@ -1,19 +1,20 @@
-# Takes the in-game screenshots the marketing kit uses: launches a dev client under Xvfb with the marketing showcase
-# (./gradlew runShowcaseClient), which builds a little bakery shop, opens every screen, screenshots them and quits, and
-# commits the captures to marketing/source/captures/ on the branch it runs on. Runs by hand, or on a push that changes
-# the visual self test or this workflow. It never publishes anything.
+# Takes the in-game screenshots the marketing kit uses: launches a 1.20.1 Forge dev client under Xvfb with the
+# marketing showcase (./gradlew :forge:runShowcaseClient in 1.20.1/), which builds a little bakery shop, opens every
+# screen, screenshots them and quits, and commits the captures to marketing/source/captures/ on main. Runs only by hand,
+# on main. It never builds a release or publishes anything.
 
 name: Marketing screenshots
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "src/visualtest/**"
-      - ".github/workflows/marketing-screenshots.yml"
 
 permissions:
   contents: read
+
+# One capture at a time, so two runs never race each other's push.
+concurrency:
+  group: marketing-screenshots-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   capture:
@@ -21,31 +22,43 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Require main
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: |
+          echo "Screenshots are only captured on main."
+          exit 1
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: |
+            17
+            21
       - uses: gradle/actions/setup-gradle@v4
       - name: Install Xvfb and Mesa
         run: sudo apt-get update && sudo apt-get install -y xvfb libgl1-mesa-dri libglx-mesa0 mesa-utils
-      - run: chmod +x gradlew
       - name: Launch the client and take the screenshots
         timeout-minutes: 25
-        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +extension RENDER" ./gradlew runShowcaseClient --stacktrace
+        working-directory: 1.20.1
+        run: |
+          chmod +x gradlew
+          xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +extension RENDER" ./gradlew :forge:runShowcaseClient --stacktrace -Porg.gradle.java.installations.fromEnv=JAVA_HOME_17_X64,JAVA_HOME_21_X64
       - name: Commit the captures
         run: |
           set -e
-          ls -la run-showcase/screenshots
-          [ ! -d run-showcase/crash-reports ] || { head -150 run-showcase/crash-reports/*.txt; exit 1; }
-          grep -q "\[showcase\] done, stopping client" run-showcase/logs/latest.log
-          if grep -E "\[showcase\] step at tick .* failed" -A8 run-showcase/logs/latest.log; then exit 1; fi
+          RUN=1.20.1/forge/runs/showcase
+          ls -la "$RUN/screenshots"
+          [ ! -d "$RUN/crash-reports" ] || { head -150 "$RUN"/crash-reports/*.txt; exit 1; }
+          grep -q "\[showcase\] done, stopping client" "$RUN/logs/latest.log"
+          if grep -E "\[showcase\] step at tick .* failed" -A8 "$RUN/logs/latest.log"; then exit 1; fi
           rm -rf marketing/source/captures
           mkdir -p marketing/source/captures
-          cp run-showcase/screenshots/*.png marketing/source/captures/
+          cp "$RUN"/screenshots/*.png marketing/source/captures/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add marketing/source/captures
           git diff --cached --quiet && { echo "No new captures"; exit 0; }
           git commit -m "Marketing screenshots from the showcase bakery"
-          git push
+          # main may have moved while the client ran (the cause of the failed run on 2026-11-23).
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "sweettreats:block/bakery_oven_top",
+    "bottom": "sweettreats:block/bakery_oven_bottom",
+    "side": "sweettreats:block/bakery_oven_side",
+    "front": "sweettreats:block/bakery_oven_front_on",
+    "particle": "sweettreats:block/bakery_oven_side"
+  }
+}

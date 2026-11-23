@@ -1,0 +1,11 @@
+{
+  "type": "sweettreats:decorating",
+  "base": "sweettreats:sponge_cake",
+  "toppings": [
+    "sweettreats:cream",
+    "sweettreats:strawberry"
+  ],
+  "result": {
+    "id": "sweettreats:strawberry_cake"
+  }
+}

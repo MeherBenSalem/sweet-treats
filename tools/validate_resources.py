@@ -16,8 +16,8 @@ import sys
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-JAVA = os.path.join(ROOT, "src", "main", "java", "com", "sugarplumstudios", "sweettreats", "registry")
-RES = os.path.join(ROOT, "src", "main", "resources")
+JAVA = os.path.join(ROOT, "1.20.1", "common", "src", "main", "java", "com", "sugarplumstudios", "sweettreats", "registry")
+RES = os.path.join(ROOT, "1.20.1", "common", "src", "main", "resources")
 ASSETS = os.path.join(RES, "assets", "sweettreats")
 DATA = os.path.join(RES, "data")
 MOD = "sweettreats"
@@ -30,8 +30,8 @@ def registered(java_file, pattern):
     return re.findall(pattern, src)
 
 
-blocks = registered("ModBlocks.java", r'BLOCKS\.register\("([a-z_]+)"')
-items = registered("ModItems.java", r'(?:ITEMS\.register|blockItem|simple)\("([a-z_]+)"')
+blocks = registered("ModBlocks.java", r'\bregister\("([a-z_]+)"')
+items = registered("ModItems.java", r'(?:\bregister|blockItem|simple)\("([a-z_]+)"')
 items = list(dict.fromkeys(items))
 
 with open(os.path.join(ASSETS, "lang", "en_us.json"), encoding="utf-8") as fh:

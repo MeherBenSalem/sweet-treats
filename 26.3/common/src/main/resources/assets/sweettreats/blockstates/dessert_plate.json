@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sweettreats:block/dessert_plate"
+    },
+    "facing=east": {
+      "model": "sweettreats:block/dessert_plate",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sweettreats:block/dessert_plate",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sweettreats:block/dessert_plate",
+      "y": 270
+    }
+  }
+}
