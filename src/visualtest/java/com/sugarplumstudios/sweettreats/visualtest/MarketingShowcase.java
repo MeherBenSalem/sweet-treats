@@ -149,11 +149,11 @@ public final class MarketingShowcase {
         });
 
         // Coordinates below are relative to the origin, in blocks: the shop spans x -6..6, z 0..10, its door is at x 0, z 0.
-        STEPS.put(200, () -> camera(5.4, 2.9, 1.2, -1.5, 0.9, 7.6));
+        STEPS.put(200, () -> camera(5.3, 3.7, 0.9, -1.5, 0.5, 7.4));
         STEPS.put(260, () -> shot("bakery"));
         STEPS.put(265, () -> camera(0.5, 2.1, 2.4, 0.5, 1.2, 5.5));
         STEPS.put(320, () -> shot("counter"));
-        STEPS.put(325, () -> camera(-1.3, 2.3, 6.6, -2.8, 1.0, 9.5));
+        STEPS.put(325, () -> camera(0.6, 2.5, 6.9, -3.4, 0.8, 9.4));
         STEPS.put(380, () -> shot("kitchen"));
         STEPS.put(385, () -> camera(-1.6, 2.1, 3.9, -4.3, 1.0, 2.0));
         STEPS.put(440, () -> shot("tea-table"));
@@ -198,16 +198,22 @@ public final class MarketingShowcase {
                     ModItems.CHERRY_PIE.get(), ModItems.HEART_CANDY.get(), ModItems.PLAIN_CUPCAKE.get(), ModItems.LAVENDER_TEA.get(),
                     ModItems.PEACH_PASTRY.get(), ModItems.MINI_DONUTS.get(), ModItems.HOT_CHOCOLATE.get(), Items.COOKIE,
                     ModItems.PINK_VANILLA_CUPCAKE.get(), ModItems.STRAWBERRY_CAKE.get(), ModItems.RAINBOW_COOKIE.get(),
-                    ModItems.LAVENDER_MACARON.get(), ModItems.MACARON_SHELLS.get(), ModItems.TEACUP.get())) {
+                    ModItems.LAVENDER_MACARON.get(), ModItems.MACARON_SHELLS.get(), ModItems.TEACUP.get(), Items.BREAD,
+                    ModItems.CHOCOLATE.get(), ModItems.SUGAR_FLOWERS.get(), ModItems.ICING.get(), ModItems.PINK_ICING.get(),
+                    ModItems.CHOCOLATE_FROSTING.get(), ModItems.TAPIOCA_PEARLS.get(), ModItems.CAKE_BATTER.get(),
+                    ModItems.COOKIE_DOUGH.get(), ModItems.PASTRY_DOUGH.get(), ModItems.MACARON_BATTER.get(),
+                    ModItems.STRAWBERRY_MILK.get(), ModItems.BUBBLE_TEA.get(), ModItems.MARSHMALLOW_CLOUD.get())) {
                 RecipeDiscovery.discoverByResult(player, new ItemStack(item));
             }
             ModNetwork.openRecipeBook(player);
         }));
+        STEPS.put(835, () -> clickRecipeBookCell(7)); // Cinnamon Roll
         STEPS.put(850, () -> shot("book-oven"));
         STEPS.put(855, () -> clickRecipeBook(2, -15)); // Decorating tab
         STEPS.put(860, () -> clickRecipeBookCell(1));
         STEPS.put(885, () -> shot("book-decorating"));
         STEPS.put(890, () -> clickRecipeBook(1, -15)); // Mixing Bowl tab
+        STEPS.put(895, () -> clickRecipeBookCell(14)); // Bubble Tea
         STEPS.put(915, () -> shot("book-mixing"));
         STEPS.put(920, () -> mc.setScreen(null));
         STEPS.put(930, () -> {
