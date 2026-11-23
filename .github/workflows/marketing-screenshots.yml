@@ -1,0 +1,48 @@
+# Takes the in-game screenshots the marketing kit uses: launches a dev client under Xvfb with the visual self test
+# (./gradlew runVisualTestClient), which builds the demo bakery, opens every screen, screenshots them and quits, and
+# commits the captures to marketing/source/captures/ on the branch it runs on. Runs by hand, or on a push that changes
+# the visual self test or this workflow. It never publishes anything.
+
+name: Marketing screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/visualtest/**"
+      - ".github/workflows/marketing-screenshots.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install Xvfb and Mesa
+        run: sudo apt-get update && sudo apt-get install -y xvfb libgl1-mesa-dri libglx-mesa0 mesa-utils
+      - run: chmod +x gradlew
+      - name: Launch the client and take the screenshots
+        timeout-minutes: 25
+        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +extension RENDER" ./gradlew runVisualTestClient --stacktrace
+      - name: Commit the captures
+        run: |
+          set -e
+          ls -la run-visualtest/screenshots
+          [ ! -d run-visualtest/crash-reports ] || { head -150 run-visualtest/crash-reports/*.txt; exit 1; }
+          mkdir -p marketing/source/captures
+          for f in run-visualtest/screenshots/sweettreats_*.png; do cp "$f" "marketing/source/captures/$(basename "$f" | sed 's/^sweettreats_//')"; done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add marketing/source/captures
+          git diff --cached --quiet && { echo "No new captures"; exit 0; }
+          git commit -m "Marketing screenshots from the visual self test"
+          git push
