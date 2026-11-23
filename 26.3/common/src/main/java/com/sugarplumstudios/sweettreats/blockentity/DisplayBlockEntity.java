@@ -1,5 +1,6 @@
 package com.sugarplumstudios.sweettreats.blockentity;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.HolderLookup;
 import com.sugarplumstudios.sweettreats.SweetTreats;
 import com.sugarplumstudios.sweettreats.block.DisplayBlock;
@@ -64,7 +65,7 @@ public class DisplayBlockEntity extends BlockEntity {
             return false;
         }
         boolean treatBlock = stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof SliceableTreatBlock;
-        if (stack.isEdible() || treatBlock || stack.is(DISPLAYABLE)) {
+        if (stack.has(DataComponents.FOOD) || treatBlock || stack.is(DISPLAYABLE)) {
             return true;
         }
         return getDisplayType() == DisplayType.GLASS_JAR && !(stack.getItem() instanceof BlockItem);

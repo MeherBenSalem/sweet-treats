@@ -109,7 +109,7 @@ public abstract class SliceableTreatBlock extends Block {
         }
         player.awardStat(Stats.EAT_CAKE_SLICE);
         player.getFoodData().eat(nutritionPerSlice, saturationPerSlice);
-        level.playSound(player, pos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.8F, 0.9F + level.getRandom().nextFloat() * 0.2F);
+        level.playSound(player, pos, SoundEvents.GENERIC_EAT.value(), SoundSource.PLAYERS, 0.8F, 0.9F + level.getRandom().nextFloat() * 0.2F);
         int bites = state.getValue(bitesProperty());
         level.gameEvent(player, GameEvent.EAT, pos);
         if (bites < maxBites()) {
