@@ -1,0 +1,43 @@
+# Renders the listing artwork in marketing/images/ (banner, icon, cards, headers, divider) with marketing/source/render.cjs
+# and commits it to the branch it runs on. Runs by hand, or on a push that changes the artwork sources or this workflow.
+# It never publishes anything.
+
+name: Marketing artwork
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "marketing/source/render.cjs"
+      - "marketing/source/renders/**"
+      - "marketing/source/fonts/**"
+      - "marketing/source/backdrop.jpg"
+      - "marketing/images/screenshots/**"
+      - ".github/workflows/marketing-artwork.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: npm install --no-save --no-audit --no-fund playwright@1.63.0
+      - name: Render the artwork
+        run: CHROMIUM="$(command -v google-chrome)" NODE_PATH="$PWD/node_modules" node marketing/source/render.cjs
+      - name: Commit the artwork
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add marketing/images
+          git diff --cached --quiet && { echo "No new artwork"; exit 0; }
+          git commit -m "Marketing artwork rendered from marketing/source"
+          git push

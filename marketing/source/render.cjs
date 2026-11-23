@@ -150,9 +150,9 @@ const card = ({ kicker, title, points, art, width = 1600, height = 900, artWidth
   </div>
   <div style="position:absolute;right:56px;top:50%;transform:translateY(-50%);width:${artWidth}px">${art}</div>`);
 
-// An exact region (x, y, w, h in source pixels, 1280x720 captures) of a screenshot, scaled to W pixels wide.
-const region = (file, x, y, w, h, W, full = 1280) => `<div style="position:relative;width:${W}px;height:${Math.round(W * h / w)}px;overflow:hidden">
-    <img src="${shot(file)}" style="position:absolute;max-width:none;width:${W * full / w}px;left:${-x * W / w}px;top:${-y * W / w}px;image-rendering:${w < 700 ? 'pixelated' : 'auto'}"></div>`;
+// An exact region (x, y, w, h in source pixels, 1920x1080 captures) of a screenshot, scaled to W pixels wide.
+const region = (file, x, y, w, h, W, full = 1920) => `<div style="position:relative;width:${W}px;height:${Math.round(W * h / w)}px;overflow:hidden">
+    <img src="${shot(file)}" style="position:absolute;max-width:none;width:${W * full / w}px;left:${-x * W / w}px;top:${-y * W / w}px;image-rendering:${w < 1000 ? 'pixelated' : 'auto'}"></div>`;
 const framed = (inner, style = '') => `<div class="frame" style="${style}">${inner}</div>`;
 const label = (text, style) => `<div class="label" style="${style}">${text}</div>`;
 const stats = (list) => `<div class="stats">${list.map(([t, v]) => `<div><div class="v">${v}</div><div class="t">${t}</div></div>`).join('')}</div>`;
@@ -170,6 +170,13 @@ const plus = '<span class="arrow" style="font-size:36px;color:var(--dim)">+</spa
 const recipeRow = (base, toppings, result, count = 1) => `<div class="tile" style="display:flex;align-items:center;gap:16px;padding:10px 22px;justify-content:center">
     ${sprite(base, 64)}${toppings.map((t) => plus + sprite(t, 64)).join('')}<span class="arrow">&rarr;</span>${sprite(result, 80)}
     <div class="n" style="font-size:22px;text-align:left;width:230px">${count > 1 ? `${count}× ` : ''}${nameOf(result)}</div></div>`;
+
+// Screen crops in the 1920x1080 captures (GUI scale 4): each machine's whole menu, the station's recipe row, the open book.
+const OVEN = { x: 600, y: 200, w: 716, h: 676 };
+const BOWL = OVEN;
+const STATION = { x: 612, y: 212, w: 692, h: 262 };
+const BOOK = { x: 440, y: 108, w: 1040, h: 836 };
+const BOOKD = BOOK;
 
 const versionText = VERSIONS.map((ver) => ver.minecraft).join(' · ');
 
@@ -230,7 +237,7 @@ const assets = {
       <div style="flex:none;width:250px;display:flex;flex-direction:column;gap:16px">
         ${tile(model('bakery_oven', 170), 'Bakery Oven', { art: 190, size: 22, sub: 'Idle' })}
         ${tile(model('bakery_oven_on', 170), 'Bakery Oven', { art: 190, size: 22, sub: 'Baking, light 13' })}</div>
-      <div style="flex:1">${framed(region('gui-oven.jpg', 410, 150, 460, 380, 710))}</div></div>` }),
+      <div style="flex:1">${framed(region('gui-oven.jpg', OVEN.x, OVEN.y, OVEN.w, OVEN.h, 710))}</div></div>` }),
 
   'card-mixing': () => card({
     kicker: 'Mixing Bowl', title: 'Stir it<br>up',
@@ -240,7 +247,7 @@ const assets = {
       <div style="flex:none;width:250px;display:flex;flex-direction:column;gap:16px">
         ${tile(model('mixing_bowl', 120), 'Mixing Bowl', { art: 150, size: 22, sub: 'No fuel needed' })}
         ${tile(`${sprite('cake_batter', 64)}${sprite('pink_icing', 64)}${sprite('tapioca_pearls', 64)}`, 'Batters & icings', { art: 90, size: 20 })}</div>
-      <div style="flex:1">${framed(region('gui-mixing-bowl.jpg', 410, 150, 460, 380, 710))}</div></div>` }),
+      <div style="flex:1">${framed(region('gui-mixing-bowl.jpg', BOWL.x, BOWL.y, BOWL.w, BOWL.h, 710))}</div></div>` }),
 
   'card-decorating': () => card({
     kicker: 'Decoration Station', title: 'Finish it<br>pretty',
@@ -251,13 +258,13 @@ const assets = {
       ${recipeRow('sponge_cake', ['cream', 'strawberry'], 'strawberry_cake')}
       ${recipeRow('macaron_shells', ['icing', 'lavender'], 'lavender_macaron', 2)}
       ${recipeRow('sugar_cookie', ['icing', 'sprinkles'], 'rainbow_cookie')}
-      ${framed(region('gui-decoration-station.jpg', 430, 190, 420, 170, 980))}</div>` }),
+      ${framed(region('gui-decoration-station.jpg', STATION.x, STATION.y, STATION.w, STATION.h, 980))}</div>` }),
 
   'card-book': () => card({
     kicker: 'Sweet Treats Recipe Book', title: 'Discover<br>every recipe',
     points: ['Tabs for the oven, bowl, decorating and crafting', 'Ingredients, station, time, food and bonus', 'Unknown recipes stay as dark silhouettes',
       'Make or pick up a treat to discover it', 'A found / total counter on every tab'],
-    art: pair(region('book-oven.jpg', 290, 110, 700, 500, 715, 1280), region('book-crafting.jpg', 290, 110, 700, 500, 715, 1280), 'Bakery Oven', 'Crafting', 720, '73%') }),
+    art: pair(region('book-oven.jpg', BOOK.x, BOOK.y, BOOK.w, BOOK.h, 715), region('book-decorating.jpg', BOOKD.x, BOOKD.y, BOOKD.w, BOOKD.h, 715), 'Bakery Oven', 'Decorating', 720, '73%') }),
 
   'card-garden': () => card({
     kicker: 'Crops and fruit trees', title: 'Grow your<br>own',
@@ -275,7 +282,7 @@ const assets = {
     kicker: 'Bakery decorations', title: 'Open your<br>shop',
     points: ['Cake displays, counters, stands, plates and jars', 'Right-click a treat on, empty hand to take it', 'Glass jars hold a whole stack of one treat',
       'Strawberry cake and cherry pie, eaten by slice', 'A tea set, a shop sign and a menu board'],
-    art: framed(region('bakery-closeup.jpg', 0, 0, 1280, 720, 978)) + `<div style="margin-top:18px">${grid(6, [
+    art: framed(region('counter.jpg', 0, 0, 1920, 1080, 978)) + `<div style="margin-top:18px">${grid(6, [
       ['cake_display', 'Cake Display'], ['cupcake_stand', 'Cupcake Stand'], ['glass_jar', 'Glass Jar'], ['bakery_counter', 'Counter'],
       ['tea_set', 'Tea Set'], ['decorative_menu', 'Menu Board']].map(([m, t]) => tile(model(m, 80), t, { art: 90, size: 17 })), 10)}</div>` }),
 

@@ -1,4 +1,4 @@
-![Sweet Treats 1.0](IMG/banner.png)
+![Sweet Treats 1.0](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/banner.png)
 
 ## A cute bakery mod.
 
@@ -6,11 +6,11 @@
 
 Three kitchen stations do the cooking: the **Bakery Oven**, the **Mixing Bowl** and the **Decoration Station**. Many treats give a small, short bonus, like Regeneration from lavender tea or Night Vision from a moon cookie.
 
-![divider](IMG/divider.png)
+![divider](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/divider.png)
 
-![The Treats](IMG/header-treats.png)
+![The Treats](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-treats.png)
 
-![24 treats and drinks](IMG/card-treats.png)
+![24 treats and drinks](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-treats.png)
 
 | Group | Treats |
 | --- | --- |
@@ -29,9 +29,9 @@ Three kitchen stations do the cooking: the **Bakery Oven**, the **Mixing Bowl** 
 | **Rainbow Cookie** | Luck I, 60 s |
 | **Moon Cookie** | Night Vision I, 30 s |
 
-![Drinks](IMG/header-drinks.png)
+![Drinks](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-drinks.png)
 
-![Teas, milkshakes and bubble tea](IMG/card-drinks.png)
+![Teas, milkshakes and bubble tea](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-drinks.png)
 
 Drinks use the drinking animation, can be sipped even when you're full, and hand back their glass bottle or teacup.
 
@@ -48,9 +48,9 @@ Drinks use the drinking animation, can be sipped even when you're full, and hand
 
 Bottled drinks come from the Mixing Bowl; teas and hot chocolate are brewed in the Bakery Oven in a teacup.
 
-![The Bakery Oven](IMG/header-oven.png)
+![The Bakery Oven](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-oven.png)
 
-![Bake it](IMG/card-oven.png)
+![Bake it](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-oven.png)
 
 - **4 ingredient slots**, a fuel slot that takes any furnace fuel, and an output slot.
 - It glows and crackles while baking and puffs smoke from its top. When a batch is done it **rings a bell and pops hearts**.
@@ -58,9 +58,9 @@ Bottled drinks come from the Mixing Bowl; teas and hot chocolate are brewed in t
 - **18 recipes:** sponge cake, cupcakes, cookies, macaron shells, cinnamon rolls, donuts, pastries, cherry pie, candies, teacups, dessert plates, teas and hot chocolate, plus bread from flour and vanilla cookies from cookie dough.
 - **Hoppers:** ingredients go in from the top, fuel from the sides, and the treats come out of the bottom.
 
-![The Mixing Bowl](IMG/header-mixing.png)
+![The Mixing Bowl](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-mixing.png)
 
-![Mix it](IMG/card-mixing.png)
+![Mix it](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-mixing.png)
 
 - **6 ingredient slots**, a container slot for glass bottles, and an output slot. It needs **no fuel**.
 - The ingredients visibly swirl inside the bowl while they mix.
@@ -69,9 +69,9 @@ Bottled drinks come from the Mixing Bowl; teas and hot chocolate are brewed in t
 
 Machine recipes are **stack-aware**: an ingredient listed twice, like 2× Sugar, can come from a single stack, so automation is easy.
 
-![The Decoration Station](IMG/header-decorating.png)
+![The Decoration Station](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-decorating.png)
 
-![Decorate it](IMG/card-decorating.png)
+![Decorate it](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-decorating.png)
 
 A base treat plus up to two toppings becomes a decorated treat **instantly**, with a sparkly chime. Leftover containers come back to you (a honey bottle hands back its glass bottle).
 
@@ -87,9 +87,9 @@ A base treat plus up to two toppings becomes a decorated treat **instantly**, wi
 | **Rainbow Cookie** | Sugar Cookie | Icing, Rainbow Sprinkles |
 | **Moon Cookie** | Sugar Cookie | Icing, Glow Berries |
 
-![The Recipe Book](IMG/header-book.png)
+![The Recipe Book](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-book.png)
 
-![Discover every recipe](IMG/card-book.png)
+![Discover every recipe](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-book.png)
 
 Every player gets a **Sweet Treats Recipe Book** the first time they join, and you can craft another from a book and sugar.
 
@@ -99,9 +99,9 @@ Every player gets a **Sweet Treats Recipe Book** the first time they join, and y
 - Discoveries are saved with your player and **survive death**.
 - The **Bakery Menu Board** block opens the recipe book too.
 
-![The Garden](IMG/header-garden.png)
+![The Garden](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-garden.png)
 
-![Grow your ingredients](IMG/card-garden.png)
+![Grow your ingredients](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-garden.png)
 
 - **Crops on farmland:** Strawberries, Vanilla and Lavender, with 8 growth stages. Bone meal and Fortune work, and bees pollinate them.
 - **Fruit trees:** a Peach Tree and a Cherry Tree, planted from pits. They grow from sapling to young tree to blossom to fruit. Right-click a fruiting tree to harvest it, and it grows its fruit back.
@@ -109,9 +109,9 @@ Every player gets a **Sweet Treats Recipe Book** the first time they join, and y
 - **Extra drops:** grass, tall grass and ferns sometimes drop seeds and pits, and cherry leaves drop cherries.
 - **Wandering traders** sell seeds and pits.
 
-![Bakery Displays](IMG/header-displays.png)
+![Bakery Displays](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-displays.png)
 
-![Show them off](IMG/card-displays.png)
+![Show them off](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-displays.png)
 
 | Block | What it does |
 | --- | --- |
@@ -126,9 +126,9 @@ Every player gets a **Sweet Treats Recipe Book** the first time they join, and y
 
 Right-click a display with a treat to put it on, and with an empty hand to take it back. **Comparators** read how full a display is. Sneak-click a counter while holding a cake to set the cake on top.
 
-![Getting Started](IMG/header-recipes.png)
+![Getting Started](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-recipes.png)
 
-Every recipe is in the Recipe Book, and the mod's GitHub page lists them all. The path through the kitchen:
+Every recipe is in the Recipe Book. The path through the kitchen:
 
 1. **Crafting table:** flour from wheat, cream from a milk bucket, cocoa powder from cocoa beans, and the **Mixing Bowl** (a stick over planks).
 2. **Mixing Bowl:** batters, doughs, icings and sugar flowers.
@@ -144,9 +144,9 @@ Every recipe is in the Recipe Book, and the mod's GitHub page lists them all. Th
 | Teacup ×2 | Clay ball and bone meal, in the oven |
 | Glass Jar ×2 | A wooden slab over five glass |
 
-![Configuration](IMG/header-config.png)
+![Configuration](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-config.png)
 
-![Set the rules](IMG/card-config.png)
+![Set the rules](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/card-config.png)
 
 `config/sweettreats-common.toml` holds the server rules:
 
@@ -168,16 +168,16 @@ Every recipe is in the Recipe Book, and the mod's GitHub page lists them all. Th
 
 `config/sweettreats-client.toml` turns the cooking particles and the cooking animations on or off for each player.
 
-![divider](IMG/divider.png)
+![divider](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/divider.png)
 
-![Everything Else](IMG/header-everything.png)
+![Everything Else](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-everything.png)
 
 - **One creative tab:** *Sweet Treats*.
 - **Item tags** for data packs: `sweettreats:treats`, `sweettreats:drinks` and `sweettreats:displayable` (extra items the displays accept).
 - **World generation** uses normal Forge biome modifiers in `data/sweettreats/forge/biome_modifier`, so a data pack can turn the wild plants off or move them.
 - **Multiplayer-ready:** recipe discoveries are saved on the server with each player.
 
-![Downloads & Compatibility](IMG/header-compatibility.png)
+![Downloads & Compatibility](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-compatibility.png)
 
 | Minecraft | Loader | Java | Also install |
 | --- | --- | --- | --- |
@@ -186,7 +186,7 @@ Every recipe is in the Recipe Book, and the mod's GitHub page lists them all. Th
 - Install Sweet Treats on **both the server and every client**.
 - Sweet Treats is a mod. It does not work as a Paper, Spigot or Folia plugin.
 
-![Questions](IMG/header-faq.png)
+![Questions](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-faq.png)
 
 **Does it need any other mods?**
 No. Sweet Treats needs only Forge.
@@ -206,8 +206,32 @@ Craft a new one from a book and sugar. Your discoveries are saved with your play
 **Is there a Fabric or NeoForge version?**
 Not yet. Sweet Treats runs on Forge for Minecraft 1.20.1.
 
-![Gallery](IMG/header-gallery.png)
+![Gallery](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/header-gallery.png)
 
-GALLERY
+![A pastel bakery shop with a cherry-wood roof, crops and fruit trees out front](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/storefront.jpg)
+
+![Inside the bakery: the display counter, the kitchen and café tables](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/bakery.jpg)
+
+![The display counter with cake displays, cupcake stands, glass jars and a dessert plate](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/counter.jpg)
+
+![The kitchen: Bakery Ovens, a Mixing Bowl on a counter, the Decoration Station and the menu board](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/kitchen.jpg)
+
+![A café table with a tea set by the window](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/tea-table.jpg)
+
+![Strawberry, vanilla and lavender crops](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/garden.jpg)
+
+![Peach and cherry trees with wild plants and flowers](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/orchard.jpg)
+
+![The Bakery Oven baking cookies](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/gui-oven.jpg)
+
+![The Mixing Bowl making bubble tea](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/gui-mixing-bowl.jpg)
+
+![The Decoration Station turning a plain cupcake into a Pink Vanilla Cupcake](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/gui-decoration-station.jpg)
+
+![The Recipe Book's Bakery Oven tab](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/book-oven.jpg)
+
+![The Recipe Book's Decorating tab](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/book-decorating.jpg)
+
+![The Recipe Book's Mixing Bowl tab](https://raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/screenshots/book-mixing.jpg)
 
 ---
