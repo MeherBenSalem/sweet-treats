@@ -37,7 +37,20 @@ No other copy or artwork names a Minecraft version. A new release number goes in
 
 | File | Size | Use |
 | --- | --- | --- |
-SIZES
+| `images/banner.png` | 1800×600, 829 KB | Description header: the bakery interior, the title, "A cute bakery mod.", four treats, the loader pill and version line |
+| `images/icon.png` | 512×512, 117 KB | Project avatar: the Pink Vanilla Cupcake in a candy-striped ring |
+| `images/card-treats.png` | 1600×900, 575 KB | The 16 baked and special treats; 24 treats, 8 drinks, 11 bonus effects, 64 recipes |
+| `images/card-drinks.png` | 1600×900, 613 KB | The eight drinks with their bonus or returned bottle |
+| `images/card-oven.png` | 1600×900, 581 KB | The Bakery Oven idle and baking, and its screen |
+| `images/card-mixing.png` | 1600×900, 591 KB | The Mixing Bowl, its ingredients and its screen |
+| `images/card-decorating.png` | 1600×900, 538 KB | Four decorating recipes and the Decoration Station screen |
+| `images/card-book.png` | 1600×900, 789 KB | The Recipe Book's Bakery Oven and Decorating tabs |
+| `images/card-garden.png` | 1600×900, 593 KB | The three crops and the fruit tree stages |
+| `images/card-displays.png` | 1600×900, 974 KB | The display counter shot and six decoration blocks |
+| `images/card-config.png` | 1600×900, 536 KB | Excerpts of `sweettreats-common.toml` and `sweettreats-client.toml` |
+| `images/header-*.png` | 1400×120, transparent, 30–51 KB | 14 section headings for the descriptions |
+| `images/divider.png` | 1400×40, transparent | Section divider |
+| `images/screenshots/*.jpg` | 1920×1080, 91–380 KB | 13 captures: gallery uploads and card art |
 
 ### Where the pictures come from
 
