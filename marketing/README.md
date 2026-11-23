@@ -44,7 +44,7 @@ No other copy or artwork names a Minecraft version. A new release number goes in
 | `images/card-oven.png` | 1600×900, 581 KB | The Bakery Oven idle and baking, and its screen |
 | `images/card-mixing.png` | 1600×900, 591 KB | The Mixing Bowl, its ingredients and its screen |
 | `images/card-decorating.png` | 1600×900, 538 KB | Four decorating recipes and the Decoration Station screen |
-| `images/card-book.png` | 1600×900, 789 KB | The Recipe Book's Bakery Oven and Decorating tabs |
+| `images/card-book.png` | 1600×900, 829 KB | The Recipe Book's Bakery Oven and Decorating tabs |
 | `images/card-garden.png` | 1600×900, 593 KB | The three crops and the fruit tree stages |
 | `images/card-displays.png` | 1600×900, 974 KB | The display counter shot and six decoration blocks |
 | `images/card-config.png` | 1600×900, 536 KB | Excerpts of `sweettreats-common.toml` and `sweettreats-client.toml` |
