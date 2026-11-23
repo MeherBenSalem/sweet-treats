@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "sweettreats:block/lavender_crop_stage0"
+    },
+    "age=1": {
+      "model": "sweettreats:block/lavender_crop_stage0"
+    },
+    "age=2": {
+      "model": "sweettreats:block/lavender_crop_stage1"
+    },
+    "age=3": {
+      "model": "sweettreats:block/lavender_crop_stage1"
+    },
+    "age=4": {
+      "model": "sweettreats:block/lavender_crop_stage2"
+    },
+    "age=5": {
+      "model": "sweettreats:block/lavender_crop_stage2"
+    },
+    "age=6": {
+      "model": "sweettreats:block/lavender_crop_stage2"
+    },
+    "age=7": {
+      "model": "sweettreats:block/lavender_crop_stage3"
+    }
+  }
+}

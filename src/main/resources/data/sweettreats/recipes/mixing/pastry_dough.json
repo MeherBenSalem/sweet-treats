@@ -1,0 +1,22 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:flour"
+    },
+    {
+      "item": "sweettreats:flour"
+    },
+    {
+      "item": "sweettreats:butter"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:pastry_dough",
+    "count": 2
+  },
+  "mixingtime": 80
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "sweettreats:peach_tree",
+    "sweettreats:cherry_tree",
+    "sweettreats:wild_strawberries",
+    "sweettreats:wild_lavender",
+    "sweettreats:wild_vanilla"
+  ]
+}

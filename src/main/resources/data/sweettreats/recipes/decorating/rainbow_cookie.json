@@ -1,0 +1,17 @@
+{
+  "type": "sweettreats:decorating",
+  "base": {
+    "item": "sweettreats:sugar_cookie"
+  },
+  "toppings": [
+    {
+      "item": "sweettreats:icing"
+    },
+    {
+      "item": "sweettreats:sprinkles"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:rainbow_cookie"
+  }
+}

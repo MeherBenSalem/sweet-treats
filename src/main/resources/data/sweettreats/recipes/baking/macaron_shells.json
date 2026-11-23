@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:macaron_batter"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:macaron_shells",
+    "count": 2
+  },
+  "cookingtime": 160,
+  "experience": 0.3
+}

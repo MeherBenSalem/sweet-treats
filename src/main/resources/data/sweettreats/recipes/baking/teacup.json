@@ -1,0 +1,17 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:teacup",
+    "count": 2
+  },
+  "cookingtime": 160,
+  "experience": 0.1
+}

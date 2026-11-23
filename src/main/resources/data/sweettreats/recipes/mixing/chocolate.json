@@ -1,0 +1,22 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:cocoa_powder"
+    },
+    {
+      "item": "sweettreats:cocoa_powder"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "sweettreats:cream"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:chocolate",
+    "count": 2
+  },
+  "mixingtime": 80
+}

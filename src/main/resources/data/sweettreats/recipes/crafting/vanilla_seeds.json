@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "sweettreats:vanilla_pod"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:vanilla_seeds"
+  }
+}

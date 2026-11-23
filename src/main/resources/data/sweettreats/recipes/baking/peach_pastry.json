@@ -1,0 +1,23 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:pastry_dough"
+    },
+    {
+      "item": "sweettreats:peach"
+    },
+    {
+      "item": "sweettreats:peach"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:peach_pastry",
+    "count": 2
+  },
+  "cookingtime": 200,
+  "experience": 0.35
+}

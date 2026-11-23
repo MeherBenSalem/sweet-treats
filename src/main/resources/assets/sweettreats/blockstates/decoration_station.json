@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sweettreats:block/decoration_station"
+    },
+    "facing=east": {
+      "model": "sweettreats:block/decoration_station",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sweettreats:block/decoration_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sweettreats:block/decoration_station",
+      "y": 270
+    }
+  }
+}

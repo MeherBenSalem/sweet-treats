@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:decorating",
+  "base": {
+    "item": "sweettreats:sugar_cookie"
+  },
+  "toppings": [
+    {
+      "item": "sweettreats:pink_icing"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:heart_cookie"
+  }
+}

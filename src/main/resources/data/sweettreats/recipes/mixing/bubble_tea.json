@@ -1,0 +1,21 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "sweettreats:cream"
+    },
+    {
+      "item": "sweettreats:tapioca_pearls"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "container": {
+    "item": "minecraft:glass_bottle"
+  },
+  "result": {
+    "item": "sweettreats:bubble_tea"
+  },
+  "mixingtime": 80
+}

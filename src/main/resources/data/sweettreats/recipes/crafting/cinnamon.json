@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "minecraft:jungle_logs"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:cinnamon",
+    "count": 4
+  }
+}

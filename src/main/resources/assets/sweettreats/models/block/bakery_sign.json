@@ -1,0 +1,115 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "sweettreats:block/bakery_sign_back",
+    "front": "sweettreats:block/bakery_sign_front",
+    "back": "sweettreats:block/bakery_sign_back"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        3,
+        14
+      ],
+      "to": [
+        16,
+        13,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#front",
+          "uv": [
+            0,
+            3,
+            16,
+            13
+          ]
+        },
+        "south": {
+          "texture": "#back",
+          "uv": [
+            0,
+            3,
+            16,
+            13
+          ]
+        },
+        "west": {
+          "texture": "#back",
+          "uv": [
+            14,
+            3,
+            16,
+            13
+          ]
+        },
+        "east": {
+          "texture": "#back",
+          "uv": [
+            0,
+            3,
+            2,
+            13
+          ]
+        },
+        "up": {
+          "texture": "#back",
+          "uv": [
+            0,
+            14,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#back",
+          "uv": [
+            0,
+            14,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        -6
+      ],
+      "scale": [
+        0.8,
+        0.8,
+        0.8
+      ]
+    }
+  }
+}

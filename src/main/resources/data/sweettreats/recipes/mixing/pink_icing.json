@@ -1,0 +1,22 @@
+{
+  "type": "sweettreats:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "sweettreats:cream"
+    },
+    {
+      "item": "sweettreats:strawberry"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:pink_icing",
+    "count": 2
+  },
+  "mixingtime": 60
+}

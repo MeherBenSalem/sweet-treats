@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:meadow",
+    "minecraft:flower_forest",
+    "minecraft:plains",
+    "minecraft:sunflower_plains",
+    "minecraft:cherry_grove"
+  ],
+  "features": "sweettreats:patch_wild_lavender",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "sweettreats:strawberry_seeds",
+    "sweettreats:vanilla_seeds",
+    "sweettreats:lavender_seeds",
+    "sweettreats:peach_pit",
+    "sweettreats:cherry_pit"
+  ]
+}

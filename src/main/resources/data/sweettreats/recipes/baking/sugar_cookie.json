@@ -1,0 +1,14 @@
+{
+  "type": "sweettreats:baking",
+  "ingredients": [
+    {
+      "item": "sweettreats:cookie_dough"
+    }
+  ],
+  "result": {
+    "item": "sweettreats:sugar_cookie",
+    "count": 4
+  },
+  "cookingtime": 160,
+  "experience": 0.3
+}
