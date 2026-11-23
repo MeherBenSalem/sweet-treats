@@ -1,0 +1,45 @@
+# Builds the release jar and commits it to release/<version>/ on the branch it runs on, once CI has passed on the same
+# commit: the jar checks, the GameTests, a Forge server booted with that jar, and a client launch. Runs on every push to
+# a release/<version> branch (the jar commit is pushed with the workflow token, so it does not start another run) or by
+# hand. Uploads nothing to CurseForge or Modrinth and makes no GitHub release.
+
+name: Build release jar
+
+on:
+  push:
+    branches: ["release/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  commit:
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Work out the version
+        run: |
+          V=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
+          case "$GITHUB_REF_NAME" in release/*) [ "${GITHUB_REF_NAME#release/}" = "$V" ] || { echo "Branch $GITHUB_REF_NAME does not match mod_version=$V"; exit 1; } ;; esac
+          echo "V=$V" >> "$GITHUB_ENV"
+      - uses: actions/download-artifact@v4
+        with:
+          name: jar
+          path: release/${{ env.V }}
+      - name: Commit the jar
+        run: |
+          ls -la "release/$V"
+          [ "$(ls release/$V/*.jar | wc -l)" = 1 ] || { echo "Expected 1 jar"; exit 1; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "release/$V"/*.jar
+          git diff --cached --quiet && { echo "The jar is already committed"; exit 0; }
+          git commit -m "Release jar for $V"
+          git push

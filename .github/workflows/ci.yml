@@ -1,0 +1,134 @@
+# Builds the Forge 1.20.1 jar and checks that it runs: the mod's GameTests (runGameTestServer), a real Forge
+# dedicated server booted with the built jar that places every Sweet Treats block (scripts/server-boot-test.sh), and a
+# real client that builds the demo bakery, opens every screen, screenshots them and quits (runVisualTestClient). Runs on
+# pull requests, by hand, and from the Build release jar workflow. It never publishes anything.
+
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew
+      - name: Build
+        run: ./gradlew build --stacktrace
+      - name: Check the jar
+        run: |
+          set -e
+          V=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
+          MC=$(grep '^minecraft_version=' gradle.properties | cut -d= -f2)
+          name="sweettreats-forge-$MC-$V.jar"
+          jar="build/libs/$name"
+          ls -la build/libs
+          [ -f "$jar" ] || { echo "Missing $jar"; exit 1; }
+          dir=$(mktemp -d); unzip -q "$jar" -d "$dir"
+          grep -q "Implementation-Version: $V" "$dir/META-INF/MANIFEST.MF" || { echo "Manifest is not $V"; exit 1; }
+          grep -q 'modId="sweettreats"' "$dir/META-INF/mods.toml" || { echo "mods.toml has no sweettreats"; exit 1; }
+          grep -q "version=\"$V\"" "$dir/META-INF/mods.toml" || { echo "mods.toml version is not $V"; exit 1; }
+          [ ! -d "$dir/com/sugarplumstudios/sweettreats/visualtest" ] || { echo "The visual self test is in the jar"; exit 1; }
+          main="$dir/com/sugarplumstudios/sweettreats/SweetTreats.class"
+          [ -f "$main" ] || { echo "No SweetTreats class"; exit 1; }
+          find "$dir/com" -name '*.class' -exec strings {} + | grep -q -E '^(m|f)_[0-9]+_$' || { echo "The jar is not SRG-mapped"; exit 1; }
+          echo "OK $name $(stat -c %s "$jar") bytes, $(find "$dir/data/sweettreats/recipes" -name '*.json' | wc -l) recipes"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jar
+          path: build/libs/sweettreats-forge-*.jar
+
+  gametests:
+    name: GameTests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew
+      - name: Run the GameTests
+        timeout-minutes: 20
+        run: ./gradlew runGameTestServer --stacktrace
+
+  server-test:
+    name: Server boot test with the built jar
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/download-artifact@v4
+        with:
+          name: jar
+          path: jar
+      - run: chmod +x scripts/server-boot-test.sh
+      - name: Boot a Forge server and place every block
+        timeout-minutes: 15
+        run: scripts/server-boot-test.sh jar/sweettreats-forge-*.jar
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-boot-test
+          path: |
+            build/boot-test-server/boot.log
+            build/boot-test-server/logs/**
+            build/boot-test-server/crash-reports/**
+          if-no-files-found: ignore
+
+  client-test:
+    name: Client launch test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install Xvfb and Mesa
+        run: sudo apt-get update && sudo apt-get install -y xvfb libgl1-mesa-dri libglx-mesa0 mesa-utils
+      - run: chmod +x gradlew
+      - name: Launch the client, build the demo bakery, screenshot every screen and quit
+        timeout-minutes: 20
+        run: |
+          xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +extension RENDER" sh -c 'glxinfo -B | head -20; ./gradlew runVisualTestClient --stacktrace'
+      - name: Check the screenshots and the log
+        run: |
+          set -e
+          ls -la run-visualtest/screenshots || true
+          n=$(ls run-visualtest/screenshots/sweettreats_*.png 2>/dev/null | wc -l)
+          echo "$n screenshots"
+          [ ! -d run-visualtest/crash-reports ] || { head -150 run-visualtest/crash-reports/*.txt; exit 1; }
+          [ "$n" -ge 11 ] || { echo "Expected 11 screenshots"; exit 1; }
+          grep -q "\[visualtest\] done, stopping client" run-visualtest/logs/latest.log || { echo "The visual test did not finish"; exit 1; }
+          if grep -E "ERROR|Exception|Caused by" run-visualtest/logs/latest.log | grep -E 'com.sugarplumstudios|sweettreats'; then echo "The log has errors naming Sweet Treats"; exit 1; fi
+      - name: Errors in the log
+        if: always()
+        run: grep -n -E "ERROR|Exception|Caused by|at com\.sugarplum" run-visualtest/logs/latest.log | head -200 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: client-test
+          path: |
+            run-visualtest/screenshots/**
+            run-visualtest/logs/latest.log
+            run-visualtest/crash-reports/**
+          if-no-files-found: ignore
