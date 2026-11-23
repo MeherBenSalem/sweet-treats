@@ -15,7 +15,6 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 
 import java.util.function.Supplier;
@@ -54,18 +53,19 @@ final class FabricWorld {
                 }
             }
             if (SweetTreatsConfig.cherryLeafDrops() && id.equals(cherryLeaves)) {
-                table.withPool(pool(0.06F).add(entry(ModItems.CHERRY, 3)).add(entry(ModItems.CHERRY_PIT, 1)));
+                table.withPool(entry(entry(pool(0.06F), ModItems.CHERRY, 3), ModItems.CHERRY_PIT, 1));
             }
         });
     }
 
     private static LootPool.Builder seeds(float chance) {
-        return pool(chance)
-                .add(entry(ModItems.STRAWBERRY_SEEDS, 5))
-                .add(entry(ModItems.LAVENDER_SEEDS, 4))
-                .add(entry(ModItems.VANILLA_SEEDS, 2))
-                .add(entry(ModItems.PEACH_PIT, 1))
-                .add(entry(ModItems.CHERRY_PIT, 1));
+        LootPool.Builder pool = pool(chance);
+        entry(pool, ModItems.STRAWBERRY_SEEDS, 5);
+        entry(pool, ModItems.LAVENDER_SEEDS, 4);
+        entry(pool, ModItems.VANILLA_SEEDS, 2);
+        entry(pool, ModItems.PEACH_PIT, 1);
+        entry(pool, ModItems.CHERRY_PIT, 1);
+        return pool;
     }
 
     private static LootPool.Builder pool(float chance) {
@@ -73,8 +73,9 @@ final class FabricWorld {
         return LootPool.lootPool().when(LootItemRandomChanceCondition.randomChance(effective));
     }
 
-    private static LootPoolSingletonContainer.Builder<?> entry(Supplier<? extends Item> item, int weight) {
-        return LootItem.lootTableItem(item.get()).setWeight(weight);
+    /** Adds a weighted item entry (26.3 has no public LootPoolSingletonContainer builder type to name). */
+    private static LootPool.Builder entry(LootPool.Builder pool, Supplier<? extends Item> item, int weight) {
+        return pool.add(LootItem.lootTableItem(item.get()).setWeight(weight));
     }
 
     private static void registerWorldgen() {
