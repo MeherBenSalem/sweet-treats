@@ -264,7 +264,7 @@ const assets = {
     kicker: 'Sweet Treats Recipe Book', title: 'Discover<br>every recipe',
     points: ['Tabs for the oven, bowl, decorating and crafting', 'Ingredients, station, time, food and bonus', 'Unknown recipes stay as dark silhouettes',
       'Make or pick up a treat to discover it', 'A found / total counter on every tab'],
-    art: pair(region('book-oven.jpg', BOOK.x, BOOK.y, BOOK.w, BOOK.h, 715), region('book-decorating.jpg', BOOKD.x, BOOKD.y, BOOKD.w, BOOKD.h, 715), 'Bakery Oven', 'Decorating', 720, '73%') }),
+    art: pair(region('book-oven.jpg', BOOK.x, BOOK.y, BOOK.w, BOOK.h, 715), region('book-decorating.jpg', BOOKD.x, BOOKD.y, BOOKD.w, BOOKD.h, 715), 'Bakery Oven', 'Decorating', 780, '64%') }),
 
   'card-garden': () => card({
     kicker: 'Crops and fruit trees', title: 'Grow your<br>own',
