@@ -72,6 +72,20 @@ minecraft {
                 }
             }
         }
+
+        // Marketing showcase: builds a little bakery shop, takes 1920x1080 shots into run-showcase/screenshots, then quits.
+        showcaseClient {
+            parent runs.client
+            workingDirectory project.file('run-showcase')
+            taskName 'runShowcaseClient'
+            property 'sweettreats.showcase', 'true'
+            args '--width', '1920', '--height', '1080'
+            mods {
+                "${mod_id}" {
+                    source sourceSets.visualtest
+                }
+            }
+        }
     }
 }
 

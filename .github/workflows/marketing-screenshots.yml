@@ -1,5 +1,5 @@
-# Takes the in-game screenshots the marketing kit uses: launches a dev client under Xvfb with the visual self test
-# (./gradlew runVisualTestClient), which builds the demo bakery, opens every screen, screenshots them and quits, and
+# Takes the in-game screenshots the marketing kit uses: launches a dev client under Xvfb with the marketing showcase
+# (./gradlew runShowcaseClient), which builds a little bakery shop, opens every screen, screenshots them and quits, and
 # commits the captures to marketing/source/captures/ on the branch it runs on. Runs by hand, or on a push that changes
 # the visual self test or this workflow. It never publishes anything.
 
@@ -32,17 +32,20 @@ jobs:
       - run: chmod +x gradlew
       - name: Launch the client and take the screenshots
         timeout-minutes: 25
-        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +extension RENDER" ./gradlew runVisualTestClient --stacktrace
+        run: xvfb-run -a -s "-screen 0 1920x1080x24 +extension GLX +extension RENDER" ./gradlew runShowcaseClient --stacktrace
       - name: Commit the captures
         run: |
           set -e
-          ls -la run-visualtest/screenshots
-          [ ! -d run-visualtest/crash-reports ] || { head -150 run-visualtest/crash-reports/*.txt; exit 1; }
+          ls -la run-showcase/screenshots
+          [ ! -d run-showcase/crash-reports ] || { head -150 run-showcase/crash-reports/*.txt; exit 1; }
+          grep -q "\[showcase\] done, stopping client" run-showcase/logs/latest.log
+          if grep -E "\[showcase\] step at tick .* failed" -A8 run-showcase/logs/latest.log; then exit 1; fi
+          rm -rf marketing/source/captures
           mkdir -p marketing/source/captures
-          for f in run-visualtest/screenshots/sweettreats_*.png; do cp "$f" "marketing/source/captures/$(basename "$f" | sed 's/^sweettreats_//')"; done
+          cp run-showcase/screenshots/*.png marketing/source/captures/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add marketing/source/captures
           git diff --cached --quiet && { echo "No new captures"; exit 0; }
-          git commit -m "Marketing screenshots from the visual self test"
+          git commit -m "Marketing screenshots from the showcase bakery"
           git push
