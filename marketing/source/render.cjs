@@ -9,7 +9,7 @@ const fs = require('fs');
 const { chromium } = require('playwright');
 
 // The release and the supported Minecraft versions. Adding a version is one line here
-// (plus one row in the compatibility table of curseforge/description.md; tools/make_modrinth_md.py copies it to modrinth/).
+// (plus one row in the compatibility table of curseforge/description.md).
 const RELEASE = { version: '1.0' };
 const VERSIONS = [
   { minecraft: '1.20.1', loaders: ['Fabric', 'Forge'] },
@@ -126,7 +126,7 @@ body { width: ${width}px; height: ${height}px; } .stage { width: ${width}px; hei
 ${transparent ? 'html, body, .stage { background: transparent; }' : ''}</style></head>
 <body><div class="stage">${body}</div>${loadScript}</body></html>`;
 
-// A section heading: a candy-striped ribbon with the title, readable on CurseForge's and Modrinth's light and dark themes.
+// A section heading: a candy-striped ribbon with the title, readable on CurseForge's light and dark themes.
 const header = (title) => page(1400, 120, `
   <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:22px">
     <div class="rule" style="width:230px;-webkit-mask-image:linear-gradient(90deg,transparent,#000);mask-image:linear-gradient(90deg,transparent,#000)"></div>

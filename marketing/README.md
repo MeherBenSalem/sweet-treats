@@ -1,6 +1,6 @@
 # Marketing assets: 1.0
 
-Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the mod JAR.
+Listing copy and artwork for CurseForge (NightBeam publishes to CurseForge only). Nothing here ships in the mod JAR.
 
 ## Listing
 
@@ -8,30 +8,21 @@ Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the 
 | --- | --- |
 | [`curseforge/description.md`](curseforge/description.md) | Full CurseForge project description (Markdown) |
 | [`curseforge/summary.txt`](curseforge/summary.txt) | Short CurseForge project summary (201 characters) |
-| [`modrinth/description.md`](modrinth/description.md) | Full Modrinth project body. The same copy as CurseForge, but the screenshots go in the project's Gallery tab instead of the page |
-| [`modrinth/summary.txt`](modrinth/summary.txt) | Modrinth summary (201 characters; Modrinth allows 256) |
-| `images/icon.png` | Project avatar on both sites |
+| `images/icon.png` | Project avatar |
 
-Image links in both descriptions point at `raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/...`. **They only work for visitors once this folder is on `main` and the repository is public.** While the repository is private, upload the images to each site instead (the CurseForge description editor and the Modrinth gallery both take uploads) and replace each URL.
+Image links in the description point at `raw.githubusercontent.com/MeherBenSalem/sweet-treats/main/marketing/images/...`. **They only work for visitors once this folder is on `main` and the repository is public.** While the repository is private, upload the images to CurseForge instead (the description editor takes uploads) and replace each URL.
 
-Both descriptions lead with the pitch, then the treats, drinks, the Bakery Oven, the Mixing Bowl, the Decoration Station, the Recipe Book, the garden, the bakery decorations, getting started, configuration, everything else, downloads and compatibility, the FAQ and (CurseForge only) a gallery.
-
-### Modrinth project settings
-
-- **Environment:** required on the client and on the server.
-- **Loaders and versions:** Fabric and Forge on Minecraft 1.20.1; Fabric and NeoForge on Minecraft 1.21.1, 26.2 and 26.3 (8 files per release; Fabric needs Fabric API).
-- **Categories:** Food and Decoration.
-- **Gallery:** upload `images/screenshots/*.jpg` with the captions used in the CurseForge gallery (the alt texts at the end of `curseforge/description.md`), and `images/banner.png` as the featured image.
+The description leads with the pitch, then the treats, drinks, the Bakery Oven, the Mixing Bowl, the Decoration Station, the Recipe Book, the garden, the bakery decorations, getting started, configuration, everything else, downloads and compatibility, the FAQ and a gallery.
 
 ## Adding a Minecraft version
 
 The supported versions are listed in these places:
 
 1. `VERSIONS` at the top of [`source/render.cjs`](source/render.cjs). Add one line, for example `{ minecraft: '26.4', loaders: ['Fabric', 'NeoForge'] },`. The banner's loader pills and version line are built from it. Then rerun the script for `banner`.
-2. The table under **Downloads & Compatibility** in `curseforge/description.md`. Add one row per loader, then run `python3 tools/make_modrinth_md.py .` to regenerate `modrinth/description.md` and `modrinth/summary.txt`.
-3. The FAQ answer **Is there a Fabric or NeoForge version?** in `curseforge/description.md` (then regenerate the Modrinth copy).
+2. The table under **Downloads & Compatibility** in `curseforge/description.md`. Add one row per loader.
+3. The FAQ answer **Is there a Fabric or NeoForge version?** in `curseforge/description.md`.
 
-No other copy or artwork names a Minecraft version. A new release number goes in `RELEASE` in `render.cjs` and in the banner's alt text on the first line of both descriptions.
+No other copy or artwork names a Minecraft version. A new release number goes in `RELEASE` in `render.cjs` and in the banner's alt text on the first line of the description.
 
 ## Images
 
@@ -48,9 +39,9 @@ No other copy or artwork names a Minecraft version. A new release number goes in
 | `images/card-garden.png` | 1600×900, 593 KB | The three crops and the fruit tree stages |
 | `images/card-displays.png` | 1600×900, 974 KB | The display counter shot and six decoration blocks |
 | `images/card-config.png` | 1600×900, 536 KB | Excerpts of `sweettreats-common.toml` and `sweettreats-client.toml` |
-| `images/header-*.png` | 1400×120, transparent, 30–51 KB | 14 section headings for the descriptions |
+| `images/header-*.png` | 1400×120, transparent, 30–51 KB | 14 section headings for the description |
 | `images/divider.png` | 1400×40, transparent | Section divider |
-| `images/screenshots/*.jpg` | 1920×1080, 91–380 KB | 13 captures: gallery uploads and card art |
+| `images/screenshots/*.jpg` | 1920×1080, 91–380 KB | 13 captures: gallery images and card art |
 
 ### Where the pictures come from
 
